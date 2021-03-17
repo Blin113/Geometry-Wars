@@ -11,6 +11,14 @@ namespace Template
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+        
+        //menu
+        enum CurrentMenu
+        {
+            StartMenu,
+            ColorMenu,
+            DeathMenu
+        }
 
         //grid
         Texture2D texture1px;
@@ -87,7 +95,6 @@ namespace Template
             spriteBatch.Begin();
 
             grid.Draw(spriteBatch, texture1px);
-            
 
             spriteBatch.End();
 
