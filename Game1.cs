@@ -11,17 +11,11 @@ namespace Template
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-        
-        //menu
-        enum CurrentMenu
-        {
-            StartMenu,
-            ColorMenu,
-            DeathMenu
-        }
+
+        //Menu
+        Menu menu = new Menu();
 
         //grid
-        Texture2D texture1px;
         Grid grid = new Grid();
 
         //KOmentar
@@ -41,8 +35,7 @@ namespace Template
         {
             // TODO: Add your initialization logic here
 
-            texture1px = new Texture2D(graphics.GraphicsDevice, 1, 1);
-            texture1px.SetData(new Color[] { Color.White });
+            
 
             base.Initialize();
         }
@@ -55,7 +48,7 @@ namespace Template
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
-
+            Assets.LoadAssets(Content, GraphicsDevice);
             // TODO: use this.Content to load your game content here 
         }
 
@@ -78,7 +71,12 @@ namespace Template
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            // TODO: Add your update logic here
+            // If not in a menu, run game
+            if(menu.CurrentMenu == CurrentMenu.None)
+            {
+
+            }
+            menu.Update();
 
             base.Update(gameTime);
         }
@@ -94,8 +92,15 @@ namespace Template
             // TODO: Add your drawing code here.
             spriteBatch.Begin();
 
-            grid.Draw(spriteBatch, texture1px);
+            if(menu.CurrentMenu == CurrentMenu.None || menu.CurrentMenu == CurrentMenu.PauseMenu)
+            {
+                grid.Draw(spriteBatch, Assets.Pixel);
+            }
 
+            spriteBatch.End();
+
+            spriteBatch.Begin(SpriteSortMode.Deferred,BlendState.Opaque);
+            menu.Draw(spriteBatch);
             spriteBatch.End();
 
             base.Draw(gameTime);
