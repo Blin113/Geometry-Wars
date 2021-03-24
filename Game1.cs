@@ -13,16 +13,23 @@ namespace Template
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-        Player p;
 
         //Menu
-        Menu menu = new Menu();
+        private Menu menu = new Menu();
 
         //grid
-        Grid grid = new Grid();
+        private Grid grid = new Grid();
 
         //Camera
-        Camera camera;
+        private Camera camera;
+
+        //player
+        private Player player;
+        private Vector2 texturePos = new Vector2(240, 240);
+
+        //angle and mouse
+        private float angle;
+        private Vector2 mousePos;
 
         //KOmentar
         public Game1()
@@ -30,7 +37,6 @@ namespace Template
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
-            camera = new Camera(GraphicsDevice.Viewport);
         }
 
         /// <summary>
@@ -43,7 +49,7 @@ namespace Template
         {
             // TODO: Add your initialization logic here
 
-            
+            camera = new Camera(GraphicsDevice.Viewport);
 
             base.Initialize();
         }
@@ -57,8 +63,11 @@ namespace Template
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
             Assets.LoadAssets(Content, GraphicsDevice);
+
+            player = new Player(Assets.Player, texturePos, angle, mousePos);
+
             // TODO: use this.Content to load your game content here 
-            camera.SetTarget(p);
+            camera.SetTarget(player);
         }
 
         /// <summary>
@@ -83,7 +92,8 @@ namespace Template
             // If not in a menu, run game
             if(menu.CurrentMenu == CurrentMenu.None)
             {
-
+                camera.UpdateCamera(GraphicsDevice.Viewport);
+                player.Update();
             }
             menu.Update();
 
@@ -104,11 +114,12 @@ namespace Template
             if(menu.CurrentMenu == CurrentMenu.None || menu.CurrentMenu == CurrentMenu.PauseMenu)
             {
                 grid.Draw(spriteBatch, Assets.Pixel);
+                player.Draw(spriteBatch);
             }
 
             spriteBatch.End();
 
-            spriteBatch.Begin(SpriteSortMode.Deferred,BlendState.Opaque);
+            spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend);
 
             menu.Draw(spriteBatch);
 

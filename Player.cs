@@ -9,7 +9,7 @@ namespace Template
     {
         public Player(Texture2D texture, Vector2 texturePos, float angle, Vector2 mousePos) : base(texture, texturePos, angle, mousePos)
         {
-            hitBox.Size = new Point(40, 40);
+            hitBox.Size = new Point(20, 20);
         }
 
         public override void Update()
@@ -64,7 +64,7 @@ namespace Template
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(texture, new Rectangle((int)texturePos.X, (int)texturePos.Y, 40, 40), null, Color.White, angle, new Vector2(texture.Width / 2,texture.Height / 2), SpriteEffects.None, 0);
+            spriteBatch.Draw(Assets.Player, new Rectangle((int)texturePos.X, (int)texturePos.Y, 20, 20), null, Color.Green, angle, new Vector2(texture.Width / 2,texture.Height / 2), SpriteEffects.None, 0);
         }
     }
 }

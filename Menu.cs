@@ -51,10 +51,8 @@ namespace Template
                     break;
 
                 case CurrentMenu.None:
-                    //Update everyting through here?
-
-                    ///om jag updaterar alla filer som player, skott och fiende i den här
-                    ///CurrentMenu.None case så kanske jag kan pausa allt när jag är i de andra menuerna.
+                    if(Keyboard.GetState().IsKeyDown(Keys.P))
+                        currentMenu = CurrentMenu.PauseMenu;
                     break;
 
                 default:
@@ -75,6 +73,7 @@ namespace Template
                     break;
 
                 case CurrentMenu.PauseMenu:
+                    spriteBatch.Draw(Assets.PauseScreen, new Rectangle(0, 0, 800, 480), new Color(Color.White, 1));
                     spriteBatch.DrawString(Assets.MenuFont, "Press space to continue", new Vector2(250, 300), Color.Purple);
                     break;
 
@@ -105,6 +104,9 @@ namespace Template
         {
             if (Keyboard.GetState().IsKeyDown(Keys.Space))
                 currentMenu = CurrentMenu.None;
+
+            //if (Keyboard.GetState().IsKeyDown(Keys.Escape))
+                //Exit
         }
 
         public void DeathMenu()
@@ -113,7 +115,7 @@ namespace Template
                 currentMenu = CurrentMenu.ColorMenu;
 
             //if (Keyboard.GetState().IsKeyDown(Keys.Escape))
-            //Exit
+                //Exit
         }
 
     }
