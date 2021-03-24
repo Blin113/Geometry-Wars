@@ -32,28 +32,61 @@ namespace Template
 
         public void Update()
         {
-            if(currentMenu == CurrentMenu.StartMenu){
-                StartMenu();
-            }
-            else if(currentMenu == CurrentMenu.ColorMenu)
+            switch (currentMenu)
             {
+                case CurrentMenu.StartMenu:
+                    StartMenu();
+                    break;
 
-            }
-            else if(currentMenu == CurrentMenu.PauseMenu)
-            {
+                case CurrentMenu.ColorMenu:
+                    ColorMenu();
+                    break;
 
-            }
-            else if(currentMenu == CurrentMenu.DeathMenu)
-            {
+                case CurrentMenu.PauseMenu:
+                    PauseMenu();
+                    break;
 
+                case CurrentMenu.DeathMenu:
+                    DeathMenu();
+                    break;
+
+                case CurrentMenu.None:
+                    //Update everyting through here?
+
+                    ///om jag updaterar alla filer som player, skott och fiende i den här
+                    ///CurrentMenu.None case så kanske jag kan pausa allt när jag är i de andra menuerna.
+                    break;
+
+                default:
+                    break;
             }
         }
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            if (currentMenu == CurrentMenu.StartMenu)
+            switch (currentMenu)
             {
-                spriteBatch.DrawString(Assets.MenuFont, "Press space to continue", new Vector2(400, 240), Color.Purple);
+                case CurrentMenu.StartMenu:
+                    spriteBatch.DrawString(Assets.MenuFont, "Press space to continue", new Vector2(250, 300), Color.Purple);
+                    break;
+
+                case CurrentMenu.ColorMenu:
+                    spriteBatch.DrawString(Assets.MenuFont, "Press space to continue", new Vector2(250, 300), Color.Purple);
+                    break;
+
+                case CurrentMenu.PauseMenu:
+                    spriteBatch.DrawString(Assets.MenuFont, "Press space to continue", new Vector2(250, 300), Color.Purple);
+                    break;
+
+                case CurrentMenu.DeathMenu:
+                    spriteBatch.DrawString(Assets.MenuFont, "Press SPACE to restartn\n Press ESCAPE to exit", new Vector2(250, 300), Color.Purple);
+                    break;
+
+                case CurrentMenu.None:
+                    break;
+
+                default:
+                    break;
             }
         }
 
@@ -63,10 +96,24 @@ namespace Template
                 currentMenu = CurrentMenu.None;
         }
 
+        public void ColorMenu()
+        {
+            //if (Keyboard.GetState().IsKeyDown(Keys.Space))
+                currentMenu = CurrentMenu.None;
+        }
         public void PauseMenu()
         {
             if (Keyboard.GetState().IsKeyDown(Keys.Space))
                 currentMenu = CurrentMenu.None;
+        }
+
+        public void DeathMenu()
+        {
+            if (Keyboard.GetState().IsKeyDown(Keys.Space))
+                currentMenu = CurrentMenu.ColorMenu;
+
+            //if (Keyboard.GetState().IsKeyDown(Keys.Escape))
+            //Exit
         }
 
     }

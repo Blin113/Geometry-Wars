@@ -1,6 +1,8 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Audio;
+using Microsoft.Xna.Framework.Media;
 
 namespace Template
 {
@@ -11,6 +13,7 @@ namespace Template
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+        Player p;
 
         //Menu
         Menu menu = new Menu();
@@ -18,11 +21,16 @@ namespace Template
         //grid
         Grid grid = new Grid();
 
+        //Camera
+        Camera camera;
+
         //KOmentar
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
-            Content.RootDirectory = "Content";    
+            Content.RootDirectory = "Content";
+            IsMouseVisible = true;
+            camera = new Camera(GraphicsDevice.Viewport);
         }
 
         /// <summary>
@@ -50,6 +58,7 @@ namespace Template
             spriteBatch = new SpriteBatch(GraphicsDevice);
             Assets.LoadAssets(Content, GraphicsDevice);
             // TODO: use this.Content to load your game content here 
+            camera.SetTarget(p);
         }
 
         /// <summary>
@@ -90,7 +99,7 @@ namespace Template
             GraphicsDevice.Clear(Color.Black);
 
             // TODO: Add your drawing code here.
-            spriteBatch.Begin();
+            spriteBatch.Begin(SpriteSortMode.Deferred, null, null, null, null, null, camera.Transform);
 
             if(menu.CurrentMenu == CurrentMenu.None || menu.CurrentMenu == CurrentMenu.PauseMenu)
             {
@@ -100,7 +109,9 @@ namespace Template
             spriteBatch.End();
 
             spriteBatch.Begin(SpriteSortMode.Deferred,BlendState.Opaque);
+
             menu.Draw(spriteBatch);
+
             spriteBatch.End();
 
             base.Draw(gameTime);
