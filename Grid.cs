@@ -12,8 +12,8 @@ namespace Template
     {
         int length = 20;
         int height = 20;
-        int columns = 50;
-        int rows = 50;
+        int columns = 100;
+        int rows = 100;
         Vector2 position = Vector2.Zero;
 
         public void Draw(SpriteBatch spriteBatch, Texture2D texture1px)
