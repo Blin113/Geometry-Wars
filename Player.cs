@@ -7,6 +7,8 @@ namespace Template
 {
     class Player : BaseClass
     {
+        Camera camera;
+
         public Player(Texture2D texture, Vector2 texturePos, float angle, Vector2 mousePos) : base(texture, texturePos, angle, mousePos)
         {
             hitBox.Size = new Point(20, 20);
@@ -40,24 +42,28 @@ namespace Template
             {
                 texturePos.X = 0;
             }
-            if (texturePos.X >= 2000)
+            if (texturePos.X >= 4000)
             {
-                texturePos.X = 2000;
+                texturePos.X = 4000;
             }
             if (texturePos.Y <= 0)
             {
                 texturePos.Y = 0;
             }
-            if (texturePos.Y >= 2000)
+            if (texturePos.Y >= 4000)
             {
-                texturePos.Y = 2000;
+                texturePos.Y = 4000;
             }
 
             //shooting and rotation
             mousePos = Mouse.GetState().Position.ToVector2();
+
+            mousePos.X = camera.Position.X;
+            mousePos.Y = camera.Position.Y;
+
             angle = (float)Math.Atan2(texturePos.Y - mousePos.Y, texturePos.X - mousePos.X) + (float)(Math.PI);
             hitBox.Location = texturePos.ToPoint();
-
+            
         }
 
         public override void Draw(SpriteBatch spriteBatch)
