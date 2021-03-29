@@ -51,6 +51,11 @@ namespace Template
 
             camera = new Camera(GraphicsDevice.Viewport);
 
+            mousePos = Mouse.GetState().Position.ToVector2();
+
+            mousePos.X = camera.Position.X;
+            mousePos.Y = camera.Position.Y;
+
             base.Initialize();
         }
 
@@ -93,6 +98,7 @@ namespace Template
             if(menu.CurrentMenu == CurrentMenu.None)
             {
                 camera.UpdateCamera(GraphicsDevice.Viewport);
+
                 player.Update();
             }
             menu.Update();

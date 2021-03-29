@@ -7,8 +7,6 @@ namespace Template
 {
     class Player : BaseClass
     {
-        Camera camera;
-
         public Player(Texture2D texture, Vector2 texturePos, float angle, Vector2 mousePos) : base(texture, texturePos, angle, mousePos)
         {
             hitBox.Size = new Point(20, 20);
@@ -57,9 +55,6 @@ namespace Template
 
             //shooting and rotation
             mousePos = Mouse.GetState().Position.ToVector2();
-
-            mousePos.X = camera.Position.X;
-            mousePos.Y = camera.Position.Y;
 
             angle = (float)Math.Atan2(texturePos.Y - mousePos.Y, texturePos.X - mousePos.X) + (float)(Math.PI);
             hitBox.Location = texturePos.ToPoint();
