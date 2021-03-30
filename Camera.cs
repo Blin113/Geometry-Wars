@@ -23,7 +23,6 @@ namespace Template
             Position = Vector2.Zero;
         }
 
-
         private void UpdateVisibleArea()
         {
             var inverseViewMatrix = Matrix.Invert(Transform);

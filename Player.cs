@@ -7,12 +7,13 @@ namespace Template
 {
     class Player : BaseClass
     {
+
         public Player(Texture2D texture, Vector2 texturePos, float angle, Vector2 mousePos) : base(texture, texturePos, angle, mousePos)
         {
             hitBox.Size = new Point(20, 20);
         }
 
-        public override void Update()
+        public override void Update(ref Camera camera)
         {
             KeyboardState kstate = Keyboard.GetState();
 
@@ -56,7 +57,8 @@ namespace Template
             //shooting and rotation
             mousePos = Mouse.GetState().Position.ToVector2();
 
-            angle = (float)Math.Atan2(texturePos.Y - mousePos.Y, texturePos.X - mousePos.X) + (float)(Math.PI);
+            angle = (float)Math.Atan2(mousePos.Y - camera.Bounds.Height/2 , mousePos.X - camera.Bounds.Width/2);        //thank Bela, the god
+
             hitBox.Location = texturePos.ToPoint();
             
         }

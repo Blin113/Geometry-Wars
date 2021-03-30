@@ -25,7 +25,7 @@ namespace Template
 
         //player
         private Player player;
-        private Vector2 texturePos = new Vector2(240, 240);
+        private Vector2 texturePos = new Vector2(1000, 1000);
 
         //angle and mouse
         private float angle;
@@ -50,11 +50,6 @@ namespace Template
             // TODO: Add your initialization logic here
 
             camera = new Camera(GraphicsDevice.Viewport);
-
-            mousePos = Mouse.GetState().Position.ToVector2();
-
-            mousePos.X = camera.Position.X;
-            mousePos.Y = camera.Position.Y;
 
             base.Initialize();
         }
@@ -99,7 +94,7 @@ namespace Template
             {
                 camera.UpdateCamera(GraphicsDevice.Viewport);
 
-                player.Update();
+                player.Update(ref camera);
             }
             menu.Update();
 

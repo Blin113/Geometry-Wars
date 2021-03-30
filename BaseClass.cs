@@ -43,7 +43,7 @@ namespace Template
             this.mousePos = mousePos;
         }
 
-        public abstract void Update();
+        public abstract void Update(ref Camera camera);
 
         public abstract void Draw(SpriteBatch spriteBatch);
 
