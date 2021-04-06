@@ -12,7 +12,7 @@ namespace Template
         private MouseState old;
         private MouseState current;
 
-        private int speed = 2;
+        private int speed;
 
         public Player(Texture2D texture, Vector2 texturePos, float angle, Vector2 mousePos) : base(texture, texturePos, angle, mousePos)
         {
@@ -58,15 +58,34 @@ namespace Template
 
             old = Mouse.GetState();
 
+            Move(kstate);
+            
+        }
 
+        public override void Draw(SpriteBatch spriteBatch)
+        {
+            spriteBatch.Draw(Assets.Player, new Rectangle((int)texturePos.X, (int)texturePos.Y, 20, 20), null, Color.White, angle, new Vector2(Assets.Player.Width / 2,Assets.Player.Height / 2), SpriteEffects.None, 0);
+        }
+
+        public void SetWeaponHandler(WeaponHandler wH)
+        {
+            weaponHandler = wH;
+        }
+
+        public void Move(KeyboardState kstate)
+        {
             //Player movement
             Vector2 direction = new Vector2((float)Math.Cos(angle), (float)Math.Sin(angle));
 
-            if (kstate.IsKeyDown(Keys.LeftShift))       //fix a timer
+            if (kstate.IsKeyDown(Keys.LeftShift))
             {
-                speed = 3;
+                speed = 4;
             }
-            
+            else
+            {
+                speed = 2;
+            }
+
             if (kstate.IsKeyDown(Keys.W))
             {
                 texturePos += direction * speed;
@@ -76,6 +95,7 @@ namespace Template
             {
                 texturePos -= direction * speed;
             }
+
             /*
             if (kstate.IsKeyDown(Keys.A))
             {
@@ -89,16 +109,6 @@ namespace Template
                 texturePos += newdirection * speed;
             }
             */
-        }
-
-        public override void Draw(SpriteBatch spriteBatch)
-        {
-            spriteBatch.Draw(Assets.Player, new Rectangle((int)texturePos.X, (int)texturePos.Y, 20, 20), null, Color.White, angle, new Vector2(Assets.Player.Width / 2,Assets.Player.Height / 2), SpriteEffects.None, 0);
-        }
-
-        public void SetWeaponHandler(WeaponHandler wH)
-        {
-            weaponHandler = wH;
         }
     }
 }

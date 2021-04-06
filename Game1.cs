@@ -44,6 +44,13 @@ namespace Template
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
+
+            graphics.PreferredBackBufferWidth = 1990;
+            graphics.PreferredBackBufferHeight = 1080;
+
+            graphics.IsFullScreen = true;
+            graphics.ApplyChanges();
+
         }
 
         /// <summary>
