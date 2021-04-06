@@ -37,20 +37,21 @@ namespace Template
         //angle and mouse
         private float angle;
         private Vector2 mousePos;
+        private Point cursorPos;
 
         //KOmentar
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
-            IsMouseVisible = true;
-
+            IsMouseVisible = false;
+            /*
             graphics.PreferredBackBufferWidth = 1990;
             graphics.PreferredBackBufferHeight = 1080;
 
             graphics.IsFullScreen = true;
             graphics.ApplyChanges();
-
+            */
         }
 
         /// <summary>
@@ -107,8 +108,12 @@ namespace Template
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
+            mousePos = Mouse.GetState().Position.ToVector2();
+
+            cursorPos = new Point((int)mousePos.X, (int)mousePos.Y);
+
             // If not in a menu, run game
-            if(menu.CurrentMenu == CurrentMenu.None)
+            if (menu.CurrentMenu == CurrentMenu.None)
             {
                 camera.UpdateCamera(GraphicsDevice.Viewport);
 
@@ -132,7 +137,7 @@ namespace Template
             // TODO: Add your drawing code here.
             spriteBatch.Begin(SpriteSortMode.Deferred, null, null, null, null, null, camera.Transform);
 
-            if(menu.CurrentMenu == CurrentMenu.None || menu.CurrentMenu == CurrentMenu.PauseMenu)
+            if (menu.CurrentMenu == CurrentMenu.None || menu.CurrentMenu == CurrentMenu.PauseMenu)
             {
                 grid.Draw(spriteBatch, Assets.Pixel);
 
@@ -147,6 +152,8 @@ namespace Template
             spriteBatch.End();
 
             spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend);
+
+            spriteBatch.Draw(Assets.Croshair, new Rectangle(cursorPos.X - 10, cursorPos.Y - 10, 20, 20), Color.White);
 
             menu.Draw(spriteBatch);
 

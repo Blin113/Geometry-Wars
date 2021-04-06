@@ -14,6 +14,8 @@ namespace Template
         public static Texture2D Pixel { get; private set; }
 
         public static Texture2D PauseScreen { get; private set; }
+        
+        public static Texture2D Croshair { get; private set; }
 
         public static Texture2D Player { get; private set; }
 
@@ -27,6 +29,8 @@ namespace Template
             Pixel.SetData(new Color[] { Color.White });
 
             MenuFont = content.Load<SpriteFont>("Menu");
+
+            Croshair = content.Load<Texture2D>("croshair");
 
             PauseScreen = content.Load<Texture2D>("PauseScreen");
 
