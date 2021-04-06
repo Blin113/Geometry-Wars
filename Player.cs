@@ -7,6 +7,12 @@ namespace Template
 {
     class Player : BaseClass
     {
+        private WeaponHandler weaponHandler;
+
+        private MouseState old;
+        private MouseState current;
+
+        private int speed = 2;
 
         public Player(Texture2D texture, Vector2 texturePos, float angle, Vector2 mousePos) : base(texture, texturePos, angle, mousePos)
         {
@@ -42,23 +48,57 @@ namespace Template
 
             hitBox.Location = texturePos.ToPoint();
 
+            old = current;
+            current = Mouse.GetState();
+
+            if (current.LeftButton == ButtonState.Pressed && old.LeftButton == ButtonState.Released)
+            {
+                weaponHandler.Shoot(texture, texturePos, angle, new Vector2(1, 1), new Point(), mousePos, DamageOrigin.player);
+            }
+
+            old = Mouse.GetState();
+
+
+            //Player movement
             Vector2 direction = new Vector2((float)Math.Cos(angle), (float)Math.Sin(angle));
 
-           
-            if (kstate.IsKeyDown(Keys.LeftShift) && kstate.IsKeyDown(Keys.W))
+            if (kstate.IsKeyDown(Keys.LeftShift))       //fix a timer
             {
-                texturePos += direction * 3;
+                speed = 3;
             }
-            else if (kstate.IsKeyDown(Keys.W))
+            
+            if (kstate.IsKeyDown(Keys.W))
             {
-                texturePos += direction * 2;
+                texturePos += direction * speed;
             }
 
+            if (kstate.IsKeyDown(Keys.S))
+            {
+                texturePos -= direction * speed;
+            }
+            /*
+            if (kstate.IsKeyDown(Keys.A))
+            {
+                Vector2 newdirection = new Vector2((float)Math.Cos(angle - Math.PI/2), (float)Math.Sin(angle - Math.PI/2));
+                texturePos += newdirection * speed;
+            }
+
+            if (kstate.IsKeyDown(Keys.D))
+            {
+                Vector2 newdirection = new Vector2((float)Math.Cos(angle + Math.PI / 2), (float)Math.Sin(angle + Math.PI / 2));
+                texturePos += newdirection * speed;
+            }
+            */
         }
 
         public override void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(Assets.Player, new Rectangle((int)texturePos.X, (int)texturePos.Y, 20, 20), null, Color.White, angle, new Vector2(Assets.Player.Width / 2,Assets.Player.Height / 2), SpriteEffects.None, 0);
+        }
+
+        public void SetWeaponHandler(WeaponHandler wH)
+        {
+            weaponHandler = wH;
         }
     }
 }

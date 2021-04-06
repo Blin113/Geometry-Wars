@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Media;
+using System.Collections.Generic;
 
 namespace Template
 {
@@ -26,6 +27,12 @@ namespace Template
         //player
         private Player player;
         private Vector2 texturePos = new Vector2(1000, 1000);
+
+        //Shooting
+        private Point size;
+        private Vector2 speed;
+        private List<Bullet> bullets1 = new List<Bullet>(); 
+        private WeaponHandler weaponHandler;
 
         //angle and mouse
         private float angle;
@@ -67,6 +74,10 @@ namespace Template
             player = new Player(Assets.Player, texturePos, angle, mousePos);
 
             // TODO: use this.Content to load your game content here 
+
+            weaponHandler = new WeaponHandler(bullets1);
+            player.SetWeaponHandler(weaponHandler);
+
             camera.SetTarget(player);
         }
 
@@ -94,6 +105,8 @@ namespace Template
             {
                 camera.UpdateCamera(GraphicsDevice.Viewport);
 
+                weaponHandler.Update(camera);
+
                 player.Update(camera);
             }
             menu.Update();
@@ -115,6 +128,12 @@ namespace Template
             if(menu.CurrentMenu == CurrentMenu.None || menu.CurrentMenu == CurrentMenu.PauseMenu)
             {
                 grid.Draw(spriteBatch, Assets.Pixel);
+
+                foreach (Bullet item in bullets1)   //rita ut bullets
+                {
+                    item.Draw(spriteBatch);
+                }
+
                 player.Draw(spriteBatch);
             }
 
