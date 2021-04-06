@@ -13,29 +13,8 @@ namespace Template
             hitBox.Size = new Point(20, 20);
         }
 
-        public override void Update(ref Camera camera)
+        public override void Update(Camera camera)
         {
-            KeyboardState kstate = Keyboard.GetState();
-
-
-            //player movement
-            if (kstate.IsKeyDown(Keys.W))
-            {
-                texturePos.Y -= 20;
-            }
-            if (kstate.IsKeyDown(Keys.A))
-            {
-                texturePos.X -= 20;
-            }
-            if (kstate.IsKeyDown(Keys.S))
-            {
-                texturePos.Y += 20;
-            }
-            if (kstate.IsKeyDown(Keys.D))
-            {
-                texturePos.X += 20;
-            }
-
             //border
             if (texturePos.X <= 0)
             {
@@ -57,10 +36,24 @@ namespace Template
             //shooting and rotation
             mousePos = Mouse.GetState().Position.ToVector2();
 
+            KeyboardState kstate = Keyboard.GetState();
+
             angle = (float)Math.Atan2(mousePos.Y - camera.Bounds.Height/2 , mousePos.X - camera.Bounds.Width/2);        //thank Bela, the god
 
             hitBox.Location = texturePos.ToPoint();
-            
+
+            Vector2 direction = new Vector2((float)Math.Cos(angle), (float)Math.Sin(angle));
+
+           
+            if (kstate.IsKeyDown(Keys.LeftShift) && kstate.IsKeyDown(Keys.W))
+            {
+                texturePos += direction * 3;
+            }
+            else if (kstate.IsKeyDown(Keys.W))
+            {
+                texturePos += direction * 2;
+            }
+
         }
 
         public override void Draw(SpriteBatch spriteBatch)

@@ -94,7 +94,7 @@ namespace Template
             {
                 camera.UpdateCamera(GraphicsDevice.Viewport);
 
-                player.Update(ref camera);
+                player.Update(camera);
             }
             menu.Update();
 
