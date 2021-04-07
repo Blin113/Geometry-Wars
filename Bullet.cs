@@ -7,7 +7,7 @@ namespace Template
     class Bullet : BaseClass
     {
         private Vector2 speed;
-        private Point size = new Point(2, 2);
+        private Point size = new Point(4, 4);
 
         private DamageOrigin damageOrigin;
 

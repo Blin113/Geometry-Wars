@@ -7,10 +7,13 @@ namespace Template
     class WeaponHandler
     {
         List<Bullet> bullets = new List<Bullet>();
+        IShoot shooting;
 
         public WeaponHandler(List<Bullet> bullets1)
         {
             bullets = bullets1;
+            shooting = new PistolShoot(bullets);
+
         }
 
         public void Update(Camera camera)
@@ -21,9 +24,14 @@ namespace Template
             }
         }
 
-        public void Shoot(Texture2D texture, Vector2 playerPos, float angle, Vector2 speed, Point size, Vector2 mousePos, DamageOrigin damageOrigin)
+        public void Shoot()
         {
-            bullets.Add(new Bullet(Assets.BulletTexture, playerPos, speed, angle, size, mousePos, damageOrigin));
+            shooting.Shoot();
+        }
+
+        public void Swap()
+        {
+            shooting = new ShotgunShoot(bullets);
         }
     }
 }
