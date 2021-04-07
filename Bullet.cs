@@ -34,7 +34,7 @@ namespace Template
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(Assets.BulletTexture, HitBox, null, Color.White, angle, new Vector2((float)Math.Cos(angle), (float)Math.Sin(angle)), SpriteEffects.None, 0);
+            spriteBatch.Draw(Assets.BulletTexture, new Rectangle((int)texturePos.Y, (int)texturePos.Y, size.X, size.Y), null, Color.White, angle, new Vector2((float)Math.Cos(angle), (float)Math.Sin(angle)), SpriteEffects.None, 0);
         }
     }
 
