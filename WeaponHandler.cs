@@ -12,7 +12,7 @@ namespace Template
         public WeaponHandler(List<Bullet> bullets1)
         {
             bullets = bullets1;
-            shooting = new PistolShoot(bullets);
+            shooting = new Pistol(bullets);
 
         }
 
@@ -31,7 +31,7 @@ namespace Template
 
         public void Swap()
         {
-            shooting = new ShotgunShoot(bullets);
+            shooting = new Shotgun(bullets);
         }
     }
 }

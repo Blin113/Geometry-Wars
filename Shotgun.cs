@@ -11,6 +11,9 @@ namespace Template
     {
         private float reloadTime = 1;
         List<Bullet> bullets;
+        float spread = 0;
+
+        Random random = new Random();
 
         public Shotgun(List<Bullet> bullets)
         {
@@ -24,7 +27,12 @@ namespace Template
 
         void IShoot.Shoot(Vector2 playerPos, float angle, Vector2 speed, Point size, Vector2 mousePos, DamageOrigin damageOrigin)
         {
-            bullets.Add(new Bullet(Assets.BulletTexture, playerPos, speed, angle, size, mousePos, damageOrigin));
+            for(int i = 0; i < 6; i++)
+            {
+                spread = random.Next(-1, 1);        //make this a float value between -af and bf
+                angle = angle + spread;
+                bullets.Add(new Bullet(Assets.BulletTexture, playerPos, speed, angle, size, mousePos, damageOrigin));
+            }
         }
     }
 }
