@@ -9,7 +9,7 @@ namespace Template
 {
     class PistolShoot : IShoot
     {
-        private float reloadTime = 1;
+        private float reloadTime = 0.5f;
         List<Bullet> bullets;
 
         public PistolShoot(List<Bullet> bullets)
