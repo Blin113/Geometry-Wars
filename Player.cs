@@ -50,7 +50,7 @@ namespace Template
 
             old = current;
             current = Mouse.GetState();
-
+            
             if (current.LeftButton == ButtonState.Pressed && old.LeftButton == ButtonState.Released)
             {
                 weaponHandler.Shoot(texturePos, angle, new Vector2(), new Point(), mousePos, DamageOrigin.player);

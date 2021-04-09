@@ -13,6 +13,7 @@ namespace Template
         List<Bullet> bullets;
         float spread = 0;
 
+
         Random random = new Random();
 
         public Shotgun(List<Bullet> bullets)
@@ -29,9 +30,15 @@ namespace Template
         {
             for(int i = 0; i < 6; i++)
             {
-                spread = random.Next(-1, 1);        //make this a float value between -xfloat and yfloat
+                float originalAngle = angle;
+
+                spread = random.Next(-5, 5);        //make this a float value
+                spread /= 10;                       //divide by 10 for float value
                 angle = angle + spread;
-                bullets.Add(new Bullet(Assets.BulletTexture, playerPos, speed, angle, size, mousePos, damageOrigin));
+
+                bullets.Add(new Bullet(Assets.BulletTexture, playerPos, angle, speed, size, mousePos, damageOrigin));
+
+                angle = originalAngle;
             }
         }
     }

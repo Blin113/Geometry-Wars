@@ -24,7 +24,7 @@ namespace Template
 
         void IShoot.Shoot(Vector2 playerPos, float angle, Vector2 speed, Point size, Vector2 mousePos, DamageOrigin damageOrigin)
         {
-            bullets.Add(new Bullet(Assets.BulletTexture, playerPos, speed, angle, size, mousePos, damageOrigin));
+            bullets.Add(new Bullet(Assets.BulletTexture, playerPos, angle, speed, size, mousePos, damageOrigin));
         }
     }
 }
