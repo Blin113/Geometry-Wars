@@ -14,6 +14,8 @@ namespace Template
 
         private int speed;
 
+        public static Vector2 CurrentPlayerPos;
+
         public Player(Texture2D texture, Vector2 texturePos, float angle, Vector2 mousePos) : base(texture, texturePos, angle, mousePos)
         {
             hitBox.Size = new Point(20, 20);
@@ -59,7 +61,8 @@ namespace Template
             old = Mouse.GetState();
 
             Move(kstate);
-            
+
+            CurrentPlayerPos = new Vector2(texturePos.X, texturePos.Y);
         }
 
         public override void Draw(SpriteBatch spriteBatch)
@@ -93,7 +96,7 @@ namespace Template
 
             if (kstate.IsKeyDown(Keys.S))
             {
-                texturePos -= direction * speed;
+                texturePos -= direction * speed * .75f;
             }
 
             /*

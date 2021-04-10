@@ -5,6 +5,8 @@ using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Media;
 using System.Collections.Generic;
 
+using Template.Enemies;     //???
+
 namespace Template
 {
     /// <summary>
@@ -39,6 +41,12 @@ namespace Template
         private Vector2 mousePos;
         private Point cursorPos;
 
+        
+        //Enemy
+        private List<BaseEnemy> enemies1 = new List<BaseEnemy>();
+        private EnemySpawner enemySpawner;
+        
+
         //KOmentar
         public Game1()
         {
@@ -65,7 +73,9 @@ namespace Template
             // TODO: Add your initialization logic here
 
             camera = new Camera(GraphicsDevice.Viewport);
-
+            
+            enemySpawner = new EnemySpawner(enemies1, bullets1);
+            
             base.Initialize();
         }
 
@@ -119,6 +129,17 @@ namespace Template
 
                 weaponHandler.Update(camera);
 
+                
+                foreach (BaseEnemy item in enemies1)
+                {
+                    item.Update(camera);
+                }
+                
+                enemySpawner.Update(gameTime);
+                
+
+                Collision();
+
                 player.Update(camera);
             }
             menu.Update();
@@ -146,6 +167,11 @@ namespace Template
                     item.Draw(spriteBatch);
                 }
 
+                foreach (BaseEnemy item in enemies1)        //rita ut fiender
+                {
+                    item.Draw(spriteBatch);
+                }
+
                 player.Draw(spriteBatch);
             }
 
@@ -160,6 +186,50 @@ namespace Template
             spriteBatch.End();
 
             base.Draw(gameTime);
+        }
+
+        public void Collision() 
+        {
+            /*
+            for (int i = 0; i < bullets1.Count; i++)
+            {
+                if (bullets1[i].HitBox.X <= 0)
+                {
+                    bullets1.RemoveAt(i);
+                    i--;
+                }
+                if (bullets1[i].HitBox.X >= 4000)
+                {
+                    bullets1.RemoveAt(i);
+                    i--;
+                }
+                if (bullets1[i].HitBox.Y <= 0)
+                {
+                    bullets1.RemoveAt(i);
+                    i--;
+                }
+                if (bullets1[i].HitBox.Y >= 4000)
+                {
+                    bullets1.RemoveAt(i);
+                    i--;
+                }
+            }
+            */
+
+            for (int i = 0; i < bullets1.Count; i++)
+            {
+                for (int j = 0; j < enemies1.Count; j++)
+                {
+                    if (bullets1[i].GetDamageOrigin == DamageOrigin.player && enemies1[j].HitBox.Intersects(bullets1[i].HitBox))
+                    {
+                        enemies1.RemoveAt(j);
+                        bullets1.RemoveAt(i);
+
+                        i--;
+                        break;
+                    }
+                }
+            }
         }
     }
 }
