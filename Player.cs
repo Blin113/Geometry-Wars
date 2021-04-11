@@ -46,7 +46,7 @@ namespace Template
 
             KeyboardState kstate = Keyboard.GetState();
 
-            angle = (float)Math.Atan2(mousePos.Y - camera.Bounds.Height/2 , mousePos.X - camera.Bounds.Width/2);        //thank Bela, the god
+            angle = (float)Math.Atan2(mousePos.Y - camera.Bounds.Height/2 , mousePos.X - camera.Bounds.Width/2);
 
             hitBox.Location = texturePos.ToPoint();
 
