@@ -6,6 +6,6 @@ namespace Template
 {
     interface IShoot
     {
-        void Shoot(Vector2 playerPos, float angle, Vector2 speed, Point size, Vector2 mousePos, DamageOrigin damageOrigin);
+        void Shoot(Vector2 playerPos, float angle, Vector2 speed, Point size, Vector2 mousePos, DamageOrigin damageOrigin,Trigger trigger);
     }
 }

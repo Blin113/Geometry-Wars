@@ -11,8 +11,8 @@ namespace Template
         
         List<Bullet> bullets;
 
-        private float coolDowm = 2;
-        private float timer = 0;
+        private float coolDowm = 0.2f;
+        private float timeLastShot= 0;
         public GameTime gameTime;
 
         public SMG(List<Bullet> bullets)
@@ -25,19 +25,15 @@ namespace Template
             get { return coolDowm; }
         }
 
-        void IShoot.Shoot(Vector2 playerPos, float angle, Vector2 speed, Point size, Vector2 mousePos, DamageOrigin damageOrigin)
+        void IShoot.Shoot(Vector2 playerPos, float angle, Vector2 speed, Point size, Vector2 mousePos, DamageOrigin damageOrigin, Trigger trigger)
         {
-            /*
-            gameTime = new GameTime();
+            float timeShot = (float)Game1.Time.TotalGameTime.TotalSeconds;
             
-            while (timer < coolDowm)
+            if( (timeShot-timeLastShot)>= coolDowm)
             {
-                timer += (float)gameTime.ElapsedGameTime.TotalSeconds;
+                timeLastShot = timeShot;
+                bullets.Add(new Bullet(Assets.BulletTexture, playerPos, angle, speed, size, mousePos, damageOrigin));
             }
-            bullets.Add(new Bullet(Assets.BulletTexture, playerPos, angle, speed, size, mousePos, damageOrigin));
-            timer = 0;
-            */
-            
         }
     }
 }

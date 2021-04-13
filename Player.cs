@@ -5,6 +5,11 @@ using Microsoft.Xna.Framework.Input;
 
 namespace Template
 {
+    enum Trigger
+    {
+        Pressed,
+        Held
+    }
     class Player : BaseClass
     {
         private WeaponHandler weaponHandler;
@@ -15,6 +20,8 @@ namespace Template
         private int speed;
 
         public static Vector2 CurrentPlayerPos;
+
+        IShoot shooting;
 
         public Player(Texture2D texture, Vector2 texturePos, float angle, Vector2 mousePos) : base(texture, texturePos, angle, mousePos)
         {
@@ -53,9 +60,15 @@ namespace Template
             old = current;
             current = Mouse.GetState();
             
-            if (current.LeftButton == ButtonState.Pressed && old.LeftButton == ButtonState.Released)
+            if (current.LeftButton == ButtonState.Pressed)
             {
-                weaponHandler.Shoot(texturePos, angle, new Vector2(), new Point(), mousePos, DamageOrigin.player);
+                Trigger trigger = Trigger.Pressed;
+                if (old.LeftButton == ButtonState.Pressed && current.LeftButton == ButtonState.Pressed)
+                {
+                    trigger = Trigger.Held;
+                }
+                    
+                weaponHandler.Shoot(texturePos, angle, new Vector2(), new Point(), mousePos, DamageOrigin.player,trigger);
             }
 
             old = Mouse.GetState();

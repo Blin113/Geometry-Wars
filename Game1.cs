@@ -16,6 +16,7 @@ namespace Template
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+        public static GameTime Time;
 
         //Menu
         private Menu menu = new Menu();
@@ -28,7 +29,7 @@ namespace Template
 
         //player
         private Player player;
-        private Vector2 texturePos = new Vector2(1000, 1000);
+        private Vector2 texturePos = new Vector2(2000, 2000);
 
         //Shooting
         private Point size;
@@ -115,6 +116,7 @@ namespace Template
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
+            Time = gameTime;
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 

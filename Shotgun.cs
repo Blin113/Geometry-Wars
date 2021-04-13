@@ -26,19 +26,26 @@ namespace Template
             get { return reloadTime; }
         }
 
-        void IShoot.Shoot(Vector2 playerPos, float angle, Vector2 speed, Point size, Vector2 mousePos, DamageOrigin damageOrigin)
+        void IShoot.Shoot(Vector2 playerPos, float angle, Vector2 speed, Point size, Vector2 mousePos, DamageOrigin damageOrigin, Trigger trigger)
         {
-            for(int i = 0; i < 6; i++)
+            if (trigger != Trigger.Pressed)
             {
-                float originalAngle = angle;
+                return;
+            }   
+            else
+            {
+                for (int i = 0; i < 6; i++)
+                {
+                    float originalAngle = angle;
 
-                spread = random.Next(-5, 5);        //make this a float value
-                spread /= 10;                       //divide by 10 for float value
-                angle = angle + spread;
+                    spread = random.Next(-5, 5);        //make this a float value
+                    spread /= 10;                       //divide by 10 for float value
+                    angle = angle + spread;
 
-                bullets.Add(new Bullet(Assets.BulletTexture, playerPos, angle, speed, size, mousePos, damageOrigin));
+                    bullets.Add(new Bullet(Assets.BulletTexture, playerPos, angle, speed, size, mousePos, damageOrigin));
 
-                angle = originalAngle;
+                    angle = originalAngle;
+                }
             }
         }
     }

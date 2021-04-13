@@ -23,9 +23,9 @@ namespace Template
             }
         }
 
-        public void Shoot(Vector2 playerPos, float angle, Vector2 speed, Point size, Vector2 mousePos, DamageOrigin damageOrigin)
+        public void Shoot(Vector2 playerPos, float angle, Vector2 speed, Point size, Vector2 mousePos, DamageOrigin damageOrigin, Trigger trigger)
         {
-            shooting.Shoot(playerPos, angle, speed, size, mousePos, damageOrigin);
+            shooting.Shoot(playerPos, angle, speed, size, mousePos, damageOrigin, trigger);
         }
 
         public void Swap()

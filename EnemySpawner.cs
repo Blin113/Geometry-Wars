@@ -29,10 +29,19 @@ namespace Template.Enemies
             {
                 x = rnd.Next(0, 4000);
                 y = rnd.Next(0, 4000);
+            } while (DistanceFromPlayer(x, y));
+            if (enemies.Count < 1)
+            {
                 enemies.Add(new BaseEnemy(Assets.Player, new Vector2(x, y), 0, new WeaponHandler(bullets)));
-            } while (enemies.Count < 1);
-            
+            }
+        }
+
+        private bool DistanceFromPlayer(int x, int y)
+        {
+            return x >= Player.CurrentPlayerPos.X + 500 
+                || x <= Player.CurrentPlayerPos.X - 500 
+                && y >= Player.CurrentPlayerPos.Y + 500 
+                || y <= Player.CurrentPlayerPos.Y - 500;
         }
     }
 }
-/*x != Player.CurrentPlayerPos.X + 500 || x != Player.CurrentPlayerPos.X - 500 && y != Player.CurrentPlayerPos.Y + 500 || y != Player.CurrentPlayerPos.Y - 500*/
