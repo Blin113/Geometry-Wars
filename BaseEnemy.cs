@@ -14,7 +14,7 @@ namespace Template.Enemies
 
         private Random rnd = new Random();
 
-        private int speed;
+        private float speed;
 
         public BaseEnemy(Texture2D texture, Vector2 texturePos, float angle, WeaponHandler weaponHandler) : base(texture, texturePos, angle)
         {
@@ -46,7 +46,7 @@ namespace Template.Enemies
         public void SearchAndDestroy()
         {
             Vector2 direction = new Vector2((float)Math.Cos(angle), (float)Math.Sin(angle));
-            speed = 2;
+            speed = 1.5f;
             texturePos += direction * speed;
         }
     }
