@@ -192,7 +192,6 @@ namespace Template
 
         public void Collision() 
         {
-            /*
             for (int i = 0; i < bullets1.Count; i++)
             {
                 if (bullets1[i].HitBox.X <= 0)
@@ -200,23 +199,22 @@ namespace Template
                     bullets1.RemoveAt(i);
                     i--;
                 }
-                if (bullets1[i].HitBox.X >= 4000)
+                else if (bullets1[i].HitBox.X >= 4000)
                 {
                     bullets1.RemoveAt(i);
                     i--;
                 }
-                if (bullets1[i].HitBox.Y <= 0)
+                else if (bullets1[i].HitBox.Y <= 0)
                 {
                     bullets1.RemoveAt(i);
                     i--;
                 }
-                if (bullets1[i].HitBox.Y >= 4000)
+                else if (bullets1[i].HitBox.Y >= 4000)
                 {
                     bullets1.RemoveAt(i);
                     i--;
                 }
             }
-            */
 
             for (int i = 0; i < bullets1.Count; i++)
             {

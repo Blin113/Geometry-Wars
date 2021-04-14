@@ -21,8 +21,6 @@ namespace Template
 
         public static Vector2 CurrentPlayerPos;
 
-        IShoot shooting;
-
         public Player(Texture2D texture, Vector2 texturePos, float angle, Vector2 mousePos) : base(texture, texturePos, angle, mousePos)
         {
             hitBox.Size = new Point(20, 20);

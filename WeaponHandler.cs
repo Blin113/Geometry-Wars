@@ -12,7 +12,7 @@ namespace Template
         public WeaponHandler(List<Bullet> bullets1)
         {
             bullets = bullets1;
-            shooting = new Shotgun(bullets);
+            shooting = new SMG(bullets);
         }
 
         public void Update(Camera camera)

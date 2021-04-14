@@ -15,6 +15,7 @@ namespace Template.Enemies
 
         private float time = 0;
         private int maxEnemies = 5;
+        private const float spawnInterval = 10;
 
         public EnemySpawner(List<BaseEnemy> enemies, List<Bullet> bullets1)
         {
@@ -30,7 +31,7 @@ namespace Template.Enemies
         /// <param name="gameTime"></param>
         public void Update(GameTime gameTime)
         {
-            time = (float)Game1.Time.TotalGameTime.TotalSeconds;
+            time += (float)Game1.Time.ElapsedGameTime.TotalSeconds;
 
             int x;
             int y;
@@ -45,7 +46,7 @@ namespace Template.Enemies
                 enemies.Add(new BaseEnemy(Assets.Player, new Vector2(x, y), 0, new WeaponHandler(bullets)));
             }
 
-            EnemyLimit(maxEnemies);
+            EnemyLimit();
         }
 
         private bool DistanceFromPlayer(int x, int y)
@@ -56,14 +57,13 @@ namespace Template.Enemies
                 || y <= Player.CurrentPlayerPos.Y - 500;
         }
 
-        private int EnemyLimit(int maxEnemies)
+        private void EnemyLimit()
         {
-            if (time > time + 10)
+            if (time > spawnInterval)
             {
                 maxEnemies += 5;
+                time -= spawnInterval;
             }
-
-            return maxEnemies;
         }
     }
 }

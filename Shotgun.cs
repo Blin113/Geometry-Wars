@@ -9,7 +9,8 @@ namespace Template
 {
     class Shotgun : IShoot
     {
-        private float reloadTime = 1;
+        private float coolDown = 0.8f;
+        private float timeLastShot = 0;
         List<Bullet> bullets;
         float spread = 0;
 
@@ -21,21 +22,25 @@ namespace Template
             this.bullets = bullets;
         }
 
-        public float ReloadTime
+        public float CoolDown
         {
-            get { return reloadTime; }
+            get { return coolDown; }
         }
 
         void IShoot.Shoot(Vector2 playerPos, float angle, Vector2 speed, Point size, Vector2 mousePos, DamageOrigin damageOrigin, Trigger trigger)
         {
+            float timeShot = (float)Game1.Time.TotalGameTime.TotalSeconds;
+
             if (trigger != Trigger.Pressed)
             {
                 return;
             }   
-            else
+            else if ((timeShot - timeLastShot) >= coolDown)
             {
                 for (int i = 0; i < 6; i++)
                 {
+                    timeLastShot = timeShot;
+
                     float originalAngle = angle;
 
                     spread = random.Next(-5, 5);        //make this a float value

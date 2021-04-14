@@ -29,7 +29,7 @@ namespace Template
         {
             float timeShot = (float)Game1.Time.TotalGameTime.TotalSeconds;
             
-            if( (timeShot-timeLastShot)>= coolDowm)
+            if((timeShot-timeLastShot)>= coolDowm)
             {
                 timeLastShot = timeShot;
                 bullets.Add(new Bullet(Assets.BulletTexture, playerPos, angle, speed, size, mousePos, damageOrigin));
