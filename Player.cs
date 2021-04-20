@@ -66,7 +66,7 @@ namespace Template
                     trigger = Trigger.Held;
                 }
                     
-                weaponHandler.Shoot(texturePos, angle, new Vector2(), new Point(), mousePos, DamageOrigin.player,trigger);
+                weaponHandler.Shoot(texturePos, angle, new Vector2(), new Point(), mousePos, DamageOrigin.player, trigger);
             }
 
             old = Mouse.GetState();

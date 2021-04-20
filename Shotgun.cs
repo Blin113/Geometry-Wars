@@ -47,7 +47,7 @@ namespace Template
                     spread /= 10;                       //divide by 10 for float value
                     angle = angle + spread;
 
-                    bullets.Add(new Bullet(Assets.BulletTexture, playerPos, angle, speed, size, mousePos, damageOrigin));
+                    bullets.Add(new Bullet(playerPos, angle, speed, size, mousePos, damageOrigin));
 
                     angle = originalAngle;
                 }

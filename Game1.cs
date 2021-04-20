@@ -233,3 +233,13 @@ namespace Template
         }
     }
 }
+
+/*
+            for (int i = 0; i < enemies1.Count; i++)
+            {
+                if (enemies1[i].HitBox.Intersects(player.HitBox))
+                {
+                    CurrentMenu = CurrentMenu.DeathMenu;
+                }
+            }
+            */

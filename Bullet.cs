@@ -18,7 +18,7 @@ namespace Template
             set => damageOrigin = value;
         }
 
-        public Bullet(Texture2D texture, Vector2 texturePos, float angle, Vector2 speed, Point size, Vector2 mousePos, DamageOrigin damageOrigin) : base(texture, texturePos, angle, mousePos)
+        public Bullet(Vector2 texturePos, float angle, Vector2 speed, Point size, Vector2 mousePos, DamageOrigin damageOrigin) : base(Assets.BulletTexture, texturePos, angle, mousePos)
         {
             this.damageOrigin = damageOrigin;
             this.speed = speed;

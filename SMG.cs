@@ -32,7 +32,7 @@ namespace Template
             if((timeShot-timeLastShot)>= coolDowm)
             {
                 timeLastShot = timeShot;
-                bullets.Add(new Bullet(Assets.BulletTexture, playerPos, angle, speed, size, mousePos, damageOrigin));
+                bullets.Add(new Bullet(playerPos, angle, speed, size, mousePos, damageOrigin));
             }
         }
     }
