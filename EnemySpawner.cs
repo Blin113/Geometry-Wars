@@ -15,7 +15,7 @@ namespace Template.Enemies
 
         private float time = 0;
         private int maxEnemies = 5;
-        private const float spawnInterval = 10;
+        private float spawnInterval = 10;
 
         public EnemySpawner(List<BaseEnemy> enemies, List<Bullet> bullets1)
         {
@@ -63,6 +63,7 @@ namespace Template.Enemies
             {
                 maxEnemies += 5;
                 time -= spawnInterval;
+                spawnInterval += 10;
             }
         }
     }

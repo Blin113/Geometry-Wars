@@ -21,6 +21,8 @@ namespace Template
 
         public static Texture2D BulletTexture { get; private set; }
 
+        public static Texture2D Enemy { get; private set; }
+
         public static SpriteFont MenuFont { get; private set; }
 
         public static void LoadAssets(ContentManager content, GraphicsDevice graphics)
@@ -35,6 +37,8 @@ namespace Template
             PauseScreen = content.Load<Texture2D>("PauseScreen");
 
             BulletTexture = content.Load<Texture2D>("BulletTexture");
+
+            Enemy = content.Load<Texture2D>("Enemy");
 
             Player = content.Load<Texture2D>("Player");
         }

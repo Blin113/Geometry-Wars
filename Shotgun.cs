@@ -43,8 +43,8 @@ namespace Template
 
                     float originalAngle = angle;
 
-                    spread = random.Next(-5, 5);        //make this a float value
-                    spread /= 10;                       //divide by 10 for float value
+                    spread = random.Next(-50, 50);
+                    spread /= 100;
                     angle = angle + spread;
 
                     bullets.Add(new Bullet(playerPos, angle, speed, size, mousePos, damageOrigin));
