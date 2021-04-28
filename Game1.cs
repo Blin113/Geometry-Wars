@@ -5,8 +5,6 @@ using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Media;
 using System.Collections.Generic;
 
-using Template.Enemies;     //???
-
 namespace Template
 {
     /// <summary>
@@ -242,4 +240,4 @@ namespace Template
                     CurrentMenu = CurrentMenu.DeathMenu;
                 }
             }
-            */
+*/

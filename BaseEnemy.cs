@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Template.Enemies
+namespace Template
 {
     class BaseEnemy : BaseClass
     {

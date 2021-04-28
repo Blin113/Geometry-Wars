@@ -25,9 +25,11 @@ namespace Template
 
         CurrentMenu currentMenu = CurrentMenu.StartMenu;
 
-        public Menu()
-        {
+        private Player player;
 
+        public Menu(Player player)
+        {
+            this.player = player;
         }
 
         public void Update()
@@ -47,7 +49,10 @@ namespace Template
                     break;
 
                 case CurrentMenu.DeathMenu:
-                    DeathMenu();
+                    if(player.IsDead())
+                    {
+                        DeathMenu();
+                    }
                     break;
 
                 case CurrentMenu.None:

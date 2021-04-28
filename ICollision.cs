@@ -8,6 +8,7 @@ namespace Template
 {
     interface ICollision
     {
-        void Collision();
+        void Collision(BaseClass collider);
     }
+
 }

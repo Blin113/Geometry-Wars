@@ -10,7 +10,7 @@ namespace Template
         Pressed,
         Held
     }
-    class Player : BaseClass
+    class Player : BaseClass, ICollision
     {
         private WeaponHandler weaponHandler;
         private Health health;
@@ -76,6 +76,8 @@ namespace Template
             Move(kstate);
 
             CurrentPlayerPos = new Vector2(texturePos.X, texturePos.Y);
+
+            
         }
 
         public override void Draw(SpriteBatch spriteBatch)
@@ -125,6 +127,19 @@ namespace Template
                 texturePos += newdirection * speed;
             }
             */
+        }
+
+        void ICollision.Collision(BaseClass collider)
+        {
+            if (collider is BaseEnemy)
+            {
+                health.currentHP -= 2;
+            }
+        }
+
+        public bool IsDead()
+        {
+            return health.currentHP <= 0;
         }
     }
 }
