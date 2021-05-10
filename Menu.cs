@@ -125,4 +125,14 @@ namespace Template
 
     }
 }
-///I den här klassen kollar vi 
+///I den här klassen kollar vi vilken meny vi är i och vad som sak ske om vi är i den menyn
+///
+///Startmenu visar bara en text att du kan spela om du klickar mellanslag
+///
+///Colormenu är inte klar men bör vara till för att välja färg på spelaren
+///
+///Pausemenu är som startmenu men öppnas om du klickar P tangenten och stängs med mellanslag
+///
+/// Deathmenu är inte heller klar men ska leda till en scoreboard och öppnas när man dör. Härifrån kan du spela om eller lämna.
+/// 
+///
