@@ -76,12 +76,11 @@ namespace Template
             Move(kstate);
 
             CurrentPlayerPos = new Vector2(texturePos.X, texturePos.Y);
-
-            
         }
 
         public override void Draw(SpriteBatch spriteBatch)
         {
+            spriteBatch.DrawString(Assets.MenuFont, health.currentHP.ToString(), new Vector2(110, 110), Color.Green);
             spriteBatch.Draw(Assets.Player, new Rectangle((int)texturePos.X, (int)texturePos.Y, 20, 20), null, Color.White, angle, new Vector2(Assets.Player.Width / 2,Assets.Player.Height / 2), SpriteEffects.None, 0);
         }
 

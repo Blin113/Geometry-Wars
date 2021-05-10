@@ -128,7 +128,6 @@ namespace Template
                 camera.UpdateCamera(GraphicsDevice.Viewport);
 
                 weaponHandler.Update(camera);
-
                 
                 foreach (BaseEnemy item in enemies1)
                 {
@@ -136,7 +135,6 @@ namespace Template
                 }
                 
                 enemySpawner.Update(gameTime);
-                
 
                 Collision();
 
@@ -228,16 +226,16 @@ namespace Template
                     }
                 }
             }
-        }
-    }
-}
 
-/*
             for (int i = 0; i < enemies1.Count; i++)
             {
                 if (enemies1[i].HitBox.Intersects(player.HitBox))
                 {
-                    CurrentMenu = CurrentMenu.DeathMenu;
+                    enemies1.RemoveAt(i);
                 }
             }
-*/
+        }
+    }
+}
+
+

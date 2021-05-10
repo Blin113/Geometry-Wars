@@ -27,9 +27,9 @@ namespace Template
 
         private Player player;
 
-        public Menu(Player player)
+        public Menu()
         {
-            this.player = player;
+
         }
 
         public void Update()
@@ -125,3 +125,4 @@ namespace Template
 
     }
 }
+///I den här klassen kollar vi 
