@@ -128,7 +128,7 @@ namespace Template
             */
         }
 
-        void ICollision.Collision(BaseClass collider)
+        public void Collision(BaseClass collider)
         {
             if (collider is BaseEnemy)
             {

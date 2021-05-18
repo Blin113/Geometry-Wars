@@ -19,6 +19,14 @@ namespace Template
         //Menu
         private Menu menu = new Menu();
 
+        //Score
+        private int highScore;
+
+        public int HighScore
+        {
+            get => highScore;
+        }
+
         //grid
         private Grid grid = new Grid();
 
@@ -231,7 +239,10 @@ namespace Template
             {
                 if (enemies1[i].HitBox.Intersects(player.HitBox))
                 {
+                    player.Collision(enemies1[i]);
                     enemies1.RemoveAt(i);
+                    i--;
+                    highScore++;
                 }
             }
         }
