@@ -20,9 +20,9 @@ namespace Template
         private Menu menu = new Menu();
 
         //Score
-        private int highScore;
+        static int highScore;
 
-        public int HighScore
+        public static int HighScore
         {
             get => highScore;
         }

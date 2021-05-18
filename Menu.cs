@@ -116,6 +116,11 @@ namespace Template
 
         public void DeathMenu()
         {
+            string hscore = Game1.HighScore.ToString() + "\n";
+
+            string[] lines = { hscore };
+            System.IO.File.WriteAllLines(@"./scoreFile.txt", lines);
+
             if (Keyboard.GetState().IsKeyDown(Keys.Space))
                 currentMenu = CurrentMenu.ColorMenu;
 
