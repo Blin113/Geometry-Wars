@@ -27,9 +27,11 @@ namespace Template
 
         private Player player;
 
-        public Menu()
-        {
+        private Health health;
 
+        public Menu(Player player)
+        {
+            this.player = player;
         }
 
         public void Update()
@@ -49,15 +51,17 @@ namespace Template
                     break;
 
                 case CurrentMenu.DeathMenu:
-                    if(player.IsDead())
-                    {
-                        DeathMenu();
-                    }
+                    DeathMenu();
                     break;
 
                 case CurrentMenu.None:
                     if(Keyboard.GetState().IsKeyDown(Keys.P))
                         currentMenu = CurrentMenu.PauseMenu;
+
+                    if (player.IsDead())
+                    {
+                        currentMenu = CurrentMenu.DeathMenu;
+                    }
                     break;
 
                 default:
@@ -83,7 +87,11 @@ namespace Template
                     break;
 
                 case CurrentMenu.DeathMenu:
-                    spriteBatch.DrawString(Assets.MenuFont, "Press SPACE to restartn\n Press ESCAPE to exit", new Vector2(250, 300), Color.Purple);
+                    spriteBatch.DrawString(Assets.MenuFont, "your score is:" + Game1.HighScore.ToString(), new Vector2(100, 100), Color.Purple);
+
+                    spriteBatch.DrawString(Assets.MenuFont, "Highscores:", new Vector2(200, 200), Color.Purple);
+
+                    spriteBatch.DrawString(Assets.MenuFont, "Press SPACE to restart\n Press ESCAPE to exit", new Vector2(250, 300), Color.Purple);
                     break;
 
                 case CurrentMenu.None:

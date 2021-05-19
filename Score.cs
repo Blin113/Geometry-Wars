@@ -8,11 +8,11 @@ namespace Template
         {
         }
 
-        public void LoadFromFile(string scoreFile)
+        public string[] LoadFromFile(string scoreFile)
         {
             string[] lines = File.ReadAllLines(@scoreFile);
 
-            //hscore = lines[0];
+            return lines;
         }
     }
 }

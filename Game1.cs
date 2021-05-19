@@ -17,7 +17,7 @@ namespace Template
         public static GameTime Time;
 
         //Menu
-        private Menu menu = new Menu();
+        private Menu menu;
 
         //Score
         static int highScore;
@@ -97,6 +97,7 @@ namespace Template
             Assets.LoadAssets(Content, GraphicsDevice);
 
             player = new Player(Assets.Player, texturePos, angle, mousePos);
+            menu = new Menu(player);
 
             // TODO: use this.Content to load your game content here 
 
@@ -186,8 +187,9 @@ namespace Template
             spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend);
 
             spriteBatch.Draw(Assets.Croshair, new Rectangle(cursorPos.X - 10, cursorPos.Y - 10, 20, 20), Color.White);
-
+            spriteBatch.DrawString(Assets.MenuFont, player.Health.currentHP.ToString(), new Vector2(10, 10), Color.Green);
             menu.Draw(spriteBatch);
+
 
             spriteBatch.End();
 
