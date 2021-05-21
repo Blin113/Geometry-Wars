@@ -234,7 +234,7 @@ namespace Template
                     {
                         enemies1.RemoveAt(j);
                         bullets1.RemoveAt(i);
-
+                        highScore++;
                         i--;
                         break;
                     }
@@ -248,7 +248,6 @@ namespace Template
                     player.Collision(enemies1[i]);
                     enemies1.RemoveAt(i);
                     i--;
-                    highScore++;
                 }
             }
         }
