@@ -187,7 +187,11 @@ namespace Template
             spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend);
 
             spriteBatch.Draw(Assets.Croshair, new Rectangle(cursorPos.X - 10, cursorPos.Y - 10, 20, 20), Color.White);
-            spriteBatch.DrawString(Assets.MenuFont, player.Health.currentHP.ToString(), new Vector2(10, 10), Color.Green);
+
+            spriteBatch.DrawString(Assets.MenuFont, "health:" + player.Health.currentHP.ToString(), new Vector2(10, 10), Color.Green);
+
+            spriteBatch.DrawString(Assets.MenuFont, "score:" + highScore.ToString(), new Vector2(340, 10), Color.Green);
+
             menu.Draw(spriteBatch);
 
 
@@ -196,7 +200,7 @@ namespace Template
             base.Draw(gameTime);
         }
 
-        public void Collision() 
+        public void Collision()
         {
             for (int i = 0; i < bullets1.Count; i++)
             {
