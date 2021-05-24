@@ -8,46 +8,33 @@ using System.Threading.Tasks;
 
 namespace Template
 {
-    class BaseEnemy : BaseClass
+    abstract class BaseEnemy
     {
-        private WeaponHandler weaponHandler;
+        protected Texture2D texture;
+        protected Vector2 texturePos;
+        protected float angle = 0;
+        protected Rectangle hitBox;
 
-        private Random rnd = new Random();
-
-        private float speed;
-
-        public BaseEnemy(Texture2D texture, Vector2 texturePos, float angle, WeaponHandler weaponHandler) : base(texture, texturePos, angle)
+        public Vector2 Position
         {
-            this.weaponHandler = weaponHandler;
-            hitBox.Size = new Point(15, 15);
+            get => texturePos;
+            set => texturePos = value;
         }
 
-        public override void Update(Camera camera)
+        public Rectangle HitBox
         {
-            angle = (float)Math.Atan2(texturePos.Y - Player.CurrentPlayerPos.Y, texturePos.X - Player.CurrentPlayerPos.X) + (float)(Math.PI);
-
-            /*
-            if (rnd.Next(0, 100) <= 1)
-            {
-                weaponHandler.Shoot(texturePos, angle, new Vector2(), new Point(), mousePos, DamageOrigin.enemy);
-            }
-            */
-
-            hitBox.Location = texturePos.ToPoint();
-
-            SearchAndDestroy();
+            get => hitBox;
         }
 
-        public override void Draw(SpriteBatch spriteBatch)
+        public BaseEnemy(Texture2D texture, Vector2 texturePos, float angle)
         {
-            spriteBatch.Draw(Assets.Enemy, new Rectangle((int)texturePos.X, (int)texturePos.Y, 15, 15), null, Color.White, angle, new Vector2(Assets.Player.Width / 2, Assets.Player.Height / 2), SpriteEffects.None, 0);
+            this.texture = texture;
+            this.texturePos = texturePos;
+            this.angle = angle;
         }
 
-        public void SearchAndDestroy()
-        {
-            Vector2 direction = new Vector2((float)Math.Cos(angle), (float)Math.Sin(angle));
-            speed = 1.5f;
-            texturePos += direction * speed;
-        }
+        public abstract void Update(Camera camera);
+
+        public abstract void Draw(SpriteBatch spriteBatch);
     }
 }

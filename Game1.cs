@@ -48,10 +48,12 @@ namespace Template
         private Vector2 mousePos;
         private Point cursorPos;
 
-        
-        //Enemy
-        private List<BaseEnemy> enemies1 = new List<BaseEnemy>();
+
+        //Enemies
         private EnemySpawner enemySpawner;
+
+        private List<Swarmer> swarmers = new List<Swarmer>();
+        
         
 
         //KOmentar
@@ -81,7 +83,7 @@ namespace Template
 
             camera = new Camera(GraphicsDevice.Viewport);
             
-            enemySpawner = new EnemySpawner(enemies1, bullets1);
+            enemySpawner = new EnemySpawner(swarmers, bullets1);
             
             base.Initialize();
         }
@@ -138,7 +140,7 @@ namespace Template
 
                 weaponHandler.Update(camera);
                 
-                foreach (BaseEnemy item in enemies1)
+                foreach (Swarmer item in swarmers)
                 {
                     item.Update(camera);
                 }
@@ -174,7 +176,7 @@ namespace Template
                     item.Draw(spriteBatch);
                 }
 
-                foreach (BaseEnemy item in enemies1)        //rita ut fiender
+                foreach (Swarmer item in swarmers)        //rita ut fiender
                 {
                     item.Draw(spriteBatch);
                 }
@@ -228,11 +230,11 @@ namespace Template
 
             for (int i = 0; i < bullets1.Count; i++)
             {
-                for (int j = 0; j < enemies1.Count; j++)
+                for (int j = 0; j < swarmers.Count; j++)
                 {
-                    if (bullets1[i].GetDamageOrigin == DamageOrigin.player && enemies1[j].HitBox.Intersects(bullets1[i].HitBox))
+                    if (bullets1[i].GetDamageOrigin == DamageOrigin.player && swarmers[j].HitBox.Intersects(bullets1[i].HitBox))
                     {
-                        enemies1.RemoveAt(j);
+                        swarmers.RemoveAt(j);
                         bullets1.RemoveAt(i);
                         highScore++;
                         i--;
@@ -242,12 +244,12 @@ namespace Template
                 }
             }
 
-            for (int i = 0; i < enemies1.Count; i++)
+            for (int i = 0; i < swarmers.Count; i++)
             {
-                if (enemies1[i].HitBox.Intersects(player.HitBox))
+                if (swarmers[i].HitBox.Intersects(player.HitBox))
                 {
-                    player.Collision(enemies1[i]);
-                    enemies1.RemoveAt(i);
+                    player.Collision(swarmers[i]);
+                    swarmers.RemoveAt(i);
                     i--;
                 }
             }

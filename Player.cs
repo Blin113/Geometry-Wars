@@ -133,9 +133,9 @@ namespace Template
             */
         }
 
-        public void Collision(BaseClass collider)
+        public void Collision(Swarmer collider)
         {
-            if (collider is BaseEnemy)
+            if (collider is Swarmer)
             {
                 health.currentHP -= 2;
             }

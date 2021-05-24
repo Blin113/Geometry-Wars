@@ -9,7 +9,7 @@ namespace Template
 {
     class EnemySpawner
     {
-        private List<BaseEnemy> enemies = new List<BaseEnemy>();
+        private List<Swarmer> swarmers = new List<Swarmer>();
         private List<Bullet> bullets = new List<Bullet>();
         private Random rnd = new Random();
 
@@ -17,9 +17,9 @@ namespace Template
         private int maxEnemies = 5;
         private float spawnInterval = 10;
 
-        public EnemySpawner(List<BaseEnemy> enemies, List<Bullet> bullets1)
+        public EnemySpawner(List<Swarmer> swarmers, List<Bullet> bullets1)
         {
-            this.enemies = enemies;
+            this.swarmers = swarmers;
             bullets = bullets1;
         }
 
@@ -41,9 +41,9 @@ namespace Template
                 y = rnd.Next(0, 4000);
             } while (DistanceFromPlayer(x, y));
 
-            if (enemies.Count < maxEnemies)
+            if (swarmers.Count < maxEnemies)
             {
-                enemies.Add(new BaseEnemy(Assets.Enemy, new Vector2(x, y), 0, new WeaponHandler(bullets)));
+                swarmers.Add(new Swarmer(Assets.Enemy, new Vector2(x, y), 0));
             }
 
             EnemyLimit();
