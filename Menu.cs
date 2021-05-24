@@ -27,7 +27,7 @@ namespace Template
 
         private Player player;
 
-        private Health health;
+        private Score score;
 
         public Menu(Player player)
         {
@@ -125,12 +125,28 @@ namespace Template
         public void DeathMenu()
         {
             string hscore = Game1.HighScore.ToString() + "\n";
-
             string[] lines = { hscore };
-            System.IO.File.WriteAllLines(@"./scoreFile.txt", lines);
+
+            for (int i = 0; i < lines.Length; i++)
+            {
+                if (int.Parse(hscore) > int.Parse(lines[i]))
+                {
+                    string temp = lines[i];
+
+                    System.IO.File.WriteAllLines(@"./scoreFile.txt", lines);
+
+                    lines[i + 2] = lines[i + 1];
+                    lines[i + 1] = temp;
+                }
+
+                if(string.IsNullOrEmpty(lines[i]))
+                {
+                    System.IO.File.WriteAllLines(@"./scoreFile.txt", lines);
+                }
+            }
 
             if (Keyboard.GetState().IsKeyDown(Keys.Space))
-                currentMenu = CurrentMenu.ColorMenu;
+                currentMenu = CurrentMenu.StartMenu;
 
             //if (Keyboard.GetState().IsKeyDown(Keys.Escape))
                 //Exit

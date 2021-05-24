@@ -190,7 +190,7 @@ namespace Template
 
             spriteBatch.DrawString(Assets.MenuFont, "health:" + player.Health.currentHP.ToString(), new Vector2(10, 10), Color.Green);
 
-            spriteBatch.DrawString(Assets.MenuFont, "score:" + highScore.ToString(), new Vector2(340, 10), Color.Green);
+            spriteBatch.DrawString(Assets.MenuFont, "score:" + highScore.ToString(), new Vector2(10, 40), Color.Green);
 
             menu.Draw(spriteBatch);
 
@@ -236,6 +236,7 @@ namespace Template
                         bullets1.RemoveAt(i);
                         highScore++;
                         i--;
+                        j--;
                         break;
                     }
                 }

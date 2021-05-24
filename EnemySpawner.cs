@@ -43,7 +43,7 @@ namespace Template
 
             if (enemies.Count < maxEnemies)
             {
-                enemies.Add(new BaseEnemy(Assets.Player, new Vector2(x, y), 0, new WeaponHandler(bullets)));
+                enemies.Add(new BaseEnemy(Assets.Enemy, new Vector2(x, y), 0, new WeaponHandler(bullets)));
             }
 
             EnemyLimit();
