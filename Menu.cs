@@ -3,9 +3,8 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Template
 {
@@ -27,11 +26,18 @@ namespace Template
 
         private Player player;
 
-        private Score score;
+        public List<string> highscores = new List<string>();
+
+        private bool saved = false;
 
         public Menu(Player player)
         {
             this.player = player;
+
+            if (!File.Exists("scoreFile.txt"))      //om filen inte existerar skapar vi den
+            {
+                File.Create("scoreFile.txt");
+            }
         }
 
         public void Update()
@@ -89,9 +95,22 @@ namespace Template
                 case CurrentMenu.DeathMenu:
                     spriteBatch.DrawString(Assets.MenuFont, "your score is:" + Game1.HighScore.ToString(), new Vector2(100, 100), Color.Purple);
 
-                    spriteBatch.DrawString(Assets.MenuFont, "Highscores:", new Vector2(200, 200), Color.Purple);
+                    int y = 140;
 
-                    spriteBatch.DrawString(Assets.MenuFont, "Press SPACE to restart\n Press ESCAPE to exit", new Vector2(250, 300), Color.Purple);
+                    spriteBatch.DrawString(Assets.MenuFont, "Highscores:", new Vector2(100, 140), Color.Purple);
+
+                    for (int i = 0; i < highscores.Count; i++)
+                    {
+                        if (i > 4)
+                        {
+                            break;
+                        }
+                            
+                        y += 40;
+                        spriteBatch.DrawString(Assets.MenuFont, highscores[i], new Vector2(140, y), Color.Purple);
+                    }
+
+                    spriteBatch.DrawString(Assets.MenuFont, "Press ESCAPE to exit", new Vector2(250, 300), Color.Purple);
                     break;
 
                 case CurrentMenu.None:
@@ -124,32 +143,38 @@ namespace Template
 
         public void DeathMenu()
         {
-            string hscore = Game1.HighScore.ToString() + "\n";
-            string[] lines = { hscore };
-
-            for (int i = 0; i < lines.Length; i++)
+            if (!saved)
             {
-                if (int.Parse(hscore) > int.Parse(lines[i]))
+                string hscore = Game1.HighScore.ToString();     //kan inte ha int från början? många konvertioner
+
+                highscores.Clear();
+
+                List<int> tempHighscores = new List<int>();
+
+                foreach (var line in File.ReadAllLines("scoreFile.txt"))    //läser från fil
                 {
-                    string temp = lines[i];
-
-                    System.IO.File.WriteAllLines(@"./scoreFile.txt", lines);
-
-                    lines[i + 2] = lines[i + 1];
-                    lines[i + 1] = temp;
+                    tempHighscores.Add(int.Parse(line));        //lägger in värden från fil i listan
                 }
 
-                if(string.IsNullOrEmpty(lines[i]))
-                {
-                    System.IO.File.WriteAllLines(@"./scoreFile.txt", lines);
-                }
+                tempHighscores.Add(Game1.HighScore);
+                tempHighscores.Sort();
+                tempHighscores.Reverse();
+
+                highscores = tempHighscores.ConvertAll(x => x.ToString());
+
+                File.WriteAllLines("scoreFile.txt", highscores); //omvandlar int listan till en string lista och sen skriver ut den till filen
+
+                saved = true;
             }
 
-            if (Keyboard.GetState().IsKeyDown(Keys.Space))
-                currentMenu = CurrentMenu.StartMenu;
 
-            //if (Keyboard.GetState().IsKeyDown(Keys.Escape))
-                //Exit
+            if (Keyboard.GetState().IsKeyDown(Keys.Space))
+            {
+                //Game1.restart = true;
+                currentMenu = CurrentMenu.StartMenu;
+            }
+
+            //ESC will exit regardless
         }
 
     }
@@ -162,6 +187,6 @@ namespace Template
 ///
 ///Pausemenu är som startmenu men öppnas om du klickar P tangenten och stängs med mellanslag
 ///
-/// Deathmenu är inte heller klar men ska leda till en scoreboard och öppnas när man dör. Härifrån kan du spela om eller lämna.
+///Deathmenu är inte heller klar men ska leda till en scoreboard och öppnas när man dör. Härifrån kan du spela om eller lämna.
 /// 
 ///

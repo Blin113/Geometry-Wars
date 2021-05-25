@@ -16,8 +16,11 @@ namespace Template
         SpriteBatch spriteBatch;
         public static GameTime Time;
 
+        //public static bool restart = false;
+
         //Menu
         private Menu menu;
+        private List<string> highscores;
 
         //Score
         static int highScore;
@@ -51,16 +54,25 @@ namespace Template
 
         //Enemies
         private EnemySpawner enemySpawner;
+        private Cannon cannon;
 
         private List<Swarmer> swarmers = new List<Swarmer>();
-        
-        
+        private List<Cannon> cannons = new List<Cannon>();
+
+        //PowerUps
+        private PowerUpSpawner powerUpSpawner;
+
+        private List<WeaponPowerUp> WeaponPowerUps = new List<WeaponPowerUp>();
+
+
 
         //KOmentar
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
+            Window.Title = "Geometry Wars";
+
             IsMouseVisible = false;
             /*
             graphics.PreferredBackBufferWidth = 1990;
@@ -83,7 +95,9 @@ namespace Template
 
             camera = new Camera(GraphicsDevice.Viewport);
             
-            enemySpawner = new EnemySpawner(swarmers, bullets1);
+            enemySpawner = new EnemySpawner(swarmers, cannons, bullets1);
+
+            powerUpSpawner = new PowerUpSpawner(WeaponPowerUps);
             
             base.Initialize();
         }
@@ -101,10 +115,14 @@ namespace Template
             player = new Player(Assets.Player, texturePos, angle, mousePos);
             menu = new Menu(player);
 
+            cannon = new Cannon(Assets.Enemy, texturePos, angle, weaponHandler);
+
             // TODO: use this.Content to load your game content here 
 
             weaponHandler = new WeaponHandler(bullets1);
             player.SetWeaponHandler(weaponHandler);
+            cannon.SetEnemyWeaponHandler(weaponHandler);
+            
 
             camera.SetTarget(player);
         }
@@ -144,8 +162,20 @@ namespace Template
                 {
                     item.Update(camera);
                 }
-                
+
+                foreach (Cannon item in cannons)
+                {
+                    item.Update(camera);
+                }
+
+                foreach(WeaponPowerUp item in WeaponPowerUps)
+                {
+                    item.Update(camera);
+                }
+
                 enemySpawner.Update(gameTime);
+
+                powerUpSpawner.Update(gameTime);
 
                 Collision();
 
@@ -153,6 +183,33 @@ namespace Template
             }
             menu.Update();
 
+            /*
+            if (restart)
+            {
+                player.Health.currentHP = player.Health.HP;
+
+                player.Position = new Vector2(2000, 2000);
+
+                highScore = 0;
+
+                for (int i = 0; i < swarmers.Count; i++)
+                {
+                    swarmers.RemoveAt(i);
+                }
+
+                for (int i = 0; i < cannons.Count; i++)
+                {
+                    cannons.RemoveAt(i);
+                }
+
+                for (int i = 0; i < WeaponPowerUps.Count; i++)
+                {
+                    WeaponPowerUps.RemoveAt(i);
+                }
+                    //need to restart somehow
+            }
+            */
+            
             base.Update(gameTime);
         }
 
@@ -177,6 +234,16 @@ namespace Template
                 }
 
                 foreach (Swarmer item in swarmers)        //rita ut fiender
+                {
+                    item.Draw(spriteBatch);
+                }
+
+                foreach (Cannon item in cannons)        //rita ut fiender
+                {
+                    item.Draw(spriteBatch);
+                }
+
+                foreach (WeaponPowerUp item in WeaponPowerUps)
                 {
                     item.Draw(spriteBatch);
                 }
@@ -244,11 +311,37 @@ namespace Template
                 }
             }
 
+            for (int i = 0; i < bullets1.Count; i++)
+            {
+                for (int j = 0; j < cannons.Count; j++)
+                {
+                    if (bullets1[i].GetDamageOrigin == DamageOrigin.player && cannons[j].HitBox.Intersects(bullets1[i].HitBox))
+                    {
+                        cannons.RemoveAt(j);
+                        bullets1.RemoveAt(i);
+                        highScore++;
+                        i--;
+                        j--;
+                        break;
+                    }
+                }
+            }
+
+            for (int i = 0; i < bullets1.Count; i++)
+            {
+                if (bullets1[i].GetDamageOrigin == DamageOrigin.enemy && player.HitBox.Intersects(bullets1[i].HitBox))
+                {
+                    bullets1.RemoveAt(i);
+                    player.Collision(null, bullets1[i]);
+                    i--;
+                }
+            }
+
             for (int i = 0; i < swarmers.Count; i++)
             {
                 if (swarmers[i].HitBox.Intersects(player.HitBox))
                 {
-                    player.Collision(swarmers[i]);
+                    player.Collision(swarmers[i], null);
                     swarmers.RemoveAt(i);
                     i--;
                 }

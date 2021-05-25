@@ -1,11 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Template
 {
@@ -16,6 +11,8 @@ namespace Template
         public static Texture2D PauseScreen { get; private set; }
         
         public static Texture2D Croshair { get; private set; }
+
+        public static Texture2D PowerUp { get; private set; }
 
         public static Texture2D Player { get; private set; }
 
@@ -33,6 +30,8 @@ namespace Template
             MenuFont = content.Load<SpriteFont>("Menu");
 
             Croshair = content.Load<Texture2D>("croshair");
+
+            PowerUp = content.Load<Texture2D>("PowerUp");
 
             PauseScreen = content.Load<Texture2D>("PauseScreen");
 

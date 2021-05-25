@@ -1,15 +1,14 @@
 ﻿using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Template
 {
     class EnemySpawner
     {
         private List<Swarmer> swarmers = new List<Swarmer>();
+        private List<Cannon> cannons = new List<Cannon>();
+
         private List<Bullet> bullets = new List<Bullet>();
         private Random rnd = new Random();
 
@@ -17,9 +16,10 @@ namespace Template
         private int maxEnemies = 5;
         private float spawnInterval = 10;
 
-        public EnemySpawner(List<Swarmer> swarmers, List<Bullet> bullets1)
+        public EnemySpawner(List<Swarmer> swarmers, List<Cannon> cannons, List<Bullet> bullets1)
         {
             this.swarmers = swarmers;
+            this.cannons = cannons;
             bullets = bullets1;
         }
 
@@ -44,6 +44,11 @@ namespace Template
             if (swarmers.Count < maxEnemies)
             {
                 swarmers.Add(new Swarmer(Assets.Enemy, new Vector2(x, y), 0));
+            }
+
+            if (cannons.Count < maxEnemies)
+            {
+                cannons.Add(new Cannon(Assets.Enemy, new Vector2(x, y), 0, new WeaponHandler(bullets)));
             }
 
             EnemyLimit();

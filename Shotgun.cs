@@ -37,6 +37,10 @@ namespace Template
             }   
             else if ((timeShot - timeLastShot) >= coolDown)
             {
+                if(damageOrigin == DamageOrigin.enemy)
+                {
+
+                }
                 for (int i = 0; i < 6; i++)
                 {
                     timeLastShot = timeShot;

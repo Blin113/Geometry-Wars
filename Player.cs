@@ -30,7 +30,7 @@ namespace Template
         public Player(Texture2D texture, Vector2 texturePos, float angle, Vector2 mousePos) : base(texture, texturePos, angle, mousePos)
         {
             hitBox.Size = new Point(20, 20);
-            health = new Health(10, 10);
+            health = new Health(10, 1);
         }
 
         public override void Update(Camera camera)
@@ -117,25 +117,11 @@ namespace Template
             {
                 texturePos -= direction * speed * .75f;
             }
-
-            /*
-            if (kstate.IsKeyDown(Keys.A))
-            {
-                Vector2 newdirection = new Vector2((float)Math.Cos(angle - Math.PI/2), (float)Math.Sin(angle - Math.PI/2));
-                texturePos += newdirection * speed;
-            }
-
-            if (kstate.IsKeyDown(Keys.D))
-            {
-                Vector2 newdirection = new Vector2((float)Math.Cos(angle + Math.PI / 2), (float)Math.Sin(angle + Math.PI / 2));
-                texturePos += newdirection * speed;
-            }
-            */
         }
 
-        public void Collision(Swarmer collider)
+        public void Collision(Swarmer swarmer_Collider, Bullet bullet_Collider)
         {
-            if (collider is Swarmer)
+            if (swarmer_Collider is Swarmer || bullet_Collider is Bullet)
             {
                 health.currentHP -= 2;
             }
