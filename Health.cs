@@ -25,7 +25,17 @@ namespace Template
         public float currentHP
         {
             get => currentHealthPoints;
-            set => currentHealthPoints = value;
+            set
+            {
+                if (value < 0)
+                {
+                    currentHealthPoints = 0;
+                }
+                else
+                {
+                    currentHealthPoints = value;
+                }
+            }
         }
     }
 }
