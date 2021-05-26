@@ -22,6 +22,19 @@ namespace Template
             get { return coolDown; }
         }
 
+        /// <summary>
+        /// shoot metod från IShoot
+        /// vi lägger bara till ett skott som beter sig som i en vanlig pistol
+        /// åker enl angivna parametrar
+        /// begränsas av coolDown
+        /// </summary>
+        /// <param name="playerPos"></param>
+        /// <param name="angle"></param>
+        /// <param name="speed"></param>
+        /// <param name="size"></param>
+        /// <param name="mousePos"></param>
+        /// <param name="damageOrigin"></param>
+        /// <param name="trigger"></param>
         void IShoot.Shoot(Vector2 playerPos, float angle, Vector2 speed, Point size, Vector2 mousePos, DamageOrigin damageOrigin,Trigger trigger)
         {
             float timeShot = (float)Game1.Time.TotalGameTime.TotalSeconds;

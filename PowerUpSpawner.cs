@@ -13,8 +13,6 @@ namespace Template
         private Random rnd = new Random();
 
         private float time = 0;
-        private int maxPowerUps = 5;
-        private float spawnInterval = 10;
 
         public PowerUpSpawner(List<WeaponPowerUp> weaponPowerUps)
         {

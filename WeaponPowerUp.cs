@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace Template
 {
-    class WeaponPowerUp : BaseObject
+    class WeaponPowerUp : BaseObject    //ett objekt som kan kolideras med. Vad som sker anges i Player.cs Collision();
     {
         public WeaponPowerUp(Texture2D texture, Vector2 texturePos, float angle) : base(texture, texturePos, angle)
         {

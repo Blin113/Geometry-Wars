@@ -9,7 +9,7 @@ using System.Linq;
 namespace Template
 {
     //menu
-    enum CurrentMenu
+    enum CurrentMenu        //enum för att bestämma vilken menu vi är i
     {
         StartMenu,
         ColorMenu,
@@ -22,19 +22,19 @@ namespace Template
     {
         public CurrentMenu CurrentMenu { get { return currentMenu; } }
 
-        CurrentMenu currentMenu = CurrentMenu.StartMenu;
+        CurrentMenu currentMenu = CurrentMenu.StartMenu;        //sättar första menyn till startmenu
 
         private Player player;
 
         public List<string> highscores = new List<string>();
 
-        private bool saved = false;
+        private bool saved = false;     //så att en oändlig loop av filhantering inte skapas.
 
         public Menu(Player player)
         {
             this.player = player;
 
-            if (!File.Exists("scoreFile.txt"))      //om filen inte existerar skapar vi den
+            if (!File.Exists("scoreFile.txt"))      //om filen inte existerar skapar vi den.
             {
                 File.Create("scoreFile.txt");
             }
@@ -42,7 +42,7 @@ namespace Template
 
         public void Update()
         {
-            switch (currentMenu)
+            switch (currentMenu)    //switch case för att köra metoderna för de olika enums av menuer
             {
                 case CurrentMenu.StartMenu:
                     StartMenu();
@@ -77,7 +77,7 @@ namespace Template
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            switch (currentMenu)
+            switch (currentMenu)        //samma som update() men vi ritar ut saker till menyn istället för att köra metoderna
             {
                 case CurrentMenu.StartMenu:
                     spriteBatch.DrawString(Assets.MenuFont, "Press space to continue", new Vector2(250, 300), Color.Purple);
@@ -99,7 +99,7 @@ namespace Template
 
                     spriteBatch.DrawString(Assets.MenuFont, "Highscores:", new Vector2(100, 140), Color.Purple);
 
-                    for (int i = 0; i < highscores.Count; i++)
+                    for (int i = 0; i < highscores.Count; i++)      //skriv ut highscores lista
                     {
                         if (i > 4)
                         {

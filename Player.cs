@@ -74,7 +74,7 @@ namespace Template
                     trigger = Trigger.Held;
                 }
                     
-                weaponHandler.Shoot(texturePos, angle, new Vector2(), new Point(), mousePos, DamageOrigin.player, trigger);
+                weaponHandler.Shoot(texturePos, angle, new Vector2(), new Point(), mousePos, DamageOrigin.player, trigger);     //anropar weaponhandler.Shoot metod med angiven skjut funktion i weaponhandler.cs
             }
 
             old = Mouse.GetState();
@@ -119,7 +119,7 @@ namespace Template
             }
         }
 
-        public void Collision(Swarmer swarmer_Collider, Bullet bullet_Collider, WeaponPowerUp powerUp_Collider)
+        public void Collision(Swarmer swarmer_Collider, Bullet bullet_Collider, WeaponPowerUp powerUp_Collider)     //kollision enligt ICollision.cs
         {
             if (swarmer_Collider is Swarmer || bullet_Collider is Bullet)
             {
@@ -132,7 +132,7 @@ namespace Template
             }
         }
 
-        public bool IsDead()
+        public bool IsDead()        //sannt om health.currentHP är mindre eller lika med 0
         {
             return health.currentHP <= 0;
         }

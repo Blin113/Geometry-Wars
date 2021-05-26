@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace Template
 {
-    class Swarmer : BaseObject
+    class Swarmer : BaseObject  //ärver från BaseObject, denna klass liknar Cannon.cs förutom att den inte anropar Weaponhandler
     {
         private float speed;
 
