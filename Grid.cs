@@ -11,7 +11,7 @@ namespace Template
         int rows = 200;
         Vector2 position = Vector2.Zero;
 
-        public void Draw(SpriteBatch spriteBatch, Texture2D texture1px)
+        public void Draw(SpriteBatch spriteBatch, Texture2D texture1px)     //ritar ut en grid enl givna parametrar
         {    
             for (float x = 0; x < columns+1; x++)
             {

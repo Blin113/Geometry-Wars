@@ -22,6 +22,9 @@ namespace Template
 
         public static SpriteFont MenuFont { get; private set; }
 
+        /// <summary>
+        /// Laddar in spelets olika texturer.
+        /// </summary>
         public static void LoadAssets(ContentManager content, GraphicsDevice graphics)
         {
             Pixel = new Texture2D(graphics, 1, 1);

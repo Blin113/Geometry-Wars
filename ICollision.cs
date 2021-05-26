@@ -8,6 +8,6 @@ namespace Template
 {
     interface ICollision
     {
-        void Collision(Swarmer swarmer_Collider, Bullet bullet_Collider, WeaponPowerUp powerUp_Collider);
+        void Collision(Swarmer swarmer_Collider, Bullet bullet_Collider, WeaponPowerUp powerUp_Collider);       //metoden används för att kolla kollision mellan eller med givna objekt i parametern
     }
 }

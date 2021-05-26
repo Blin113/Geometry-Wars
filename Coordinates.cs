@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Template
 {
-    public class Coordinates<T>
+    public class Coordinates<T> //genersisk klass för koordinater
     {
         public static T[] CreateCoordinatesArray<T>(T x, T y)       //tekniskt sett är det en generisk metod....
         {

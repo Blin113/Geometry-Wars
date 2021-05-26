@@ -29,7 +29,7 @@ namespace Template
             {
                 if (value < 0)
                 {
-                    currentHealthPoints = 0;
+                    currentHealthPoints = 0;        //currentHealthPoints ska ej bli negativt
                 }
                 else
                 {

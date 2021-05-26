@@ -8,6 +8,10 @@ using System.Threading.Tasks;
 
 namespace Template
 {
+
+    /// <summary>
+    /// en bas klass som används som en mall för dess "barn"
+    /// </summary>
     public abstract class BaseClass
     {
         protected Texture2D texture;

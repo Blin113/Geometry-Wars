@@ -269,6 +269,9 @@ namespace Template
             base.Draw(gameTime);
         }
 
+        /// <summary>
+        /// kollar kollision mellan olika objekt som bullets, swarmers, cannons, player samt PowerUps
+        /// </summary>
         public void Collision()
         {
             for (int i = 0; i < bullets1.Count; i++)

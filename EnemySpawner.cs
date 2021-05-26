@@ -4,6 +4,9 @@ using System.Collections.Generic;
 
 namespace Template
 {
+    /// <summary>
+    /// tar hand om fiendernas spawning
+    /// </summary>
     class EnemySpawner
     {
         private List<Swarmer> swarmers = new List<Swarmer>();
@@ -37,16 +40,16 @@ namespace Template
             int y;
             do
             {
-                x = rnd.Next(0, 4000);
+                x = rnd.Next(0, 4000);      //x, y position för fiende, en av varje på samma (x, y)
                 y = rnd.Next(0, 4000);
             } while (DistanceFromPlayer(x, y));
 
-            if (swarmers.Count < maxEnemies)
+            if (swarmers.Count < maxEnemies)    //spawnar fiender av typen Swarmer, begränsas av EnemyLimit()
             {
                 swarmers.Add(new Swarmer(Assets.Enemy, new Vector2(x, y), 0));
             }
 
-            if (cannons.Count < maxEnemies)
+            if (cannons.Count < maxEnemies)     //spawnar fiender av typen Cannon, begränsas av EnemyLimit()
             {
                 cannons.Add(new Cannon(Assets.Enemy, new Vector2(x, y), 0, new WeaponHandler(bullets)));
             }
@@ -54,7 +57,7 @@ namespace Template
             EnemyLimit();
         }
 
-        private bool DistanceFromPlayer(int x, int y)
+        private bool DistanceFromPlayer(int x, int y)       //gränser för spawn -- Funkar konstigt?
         {
             return x >= Player.CurrentPlayerPos.X + 500 
                 || x <= Player.CurrentPlayerPos.X - 500 
@@ -62,7 +65,7 @@ namespace Template
                 || y <= Player.CurrentPlayerPos.Y - 500;
         }
 
-        private void EnemyLimit()
+        private void EnemyLimit()   //gräns för antal enemies
         {
             if (time > spawnInterval)
             {

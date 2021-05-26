@@ -21,9 +21,9 @@ namespace Template
 
         public override void Update(Camera camera)
         {
-            angle = (float)Math.Atan2(texturePos.Y - Player.CurrentPlayerPos.Y, texturePos.X - Player.CurrentPlayerPos.X) + (float)(Math.PI);
+            angle = (float)Math.Atan2(texturePos.Y - Player.CurrentPlayerPos.Y, texturePos.X - Player.CurrentPlayerPos.X) + (float)(Math.PI);   //vinklar fiende mot spelaren
 
-            if (rnd.Next(0, 100) < 1)
+            if (rnd.Next(0, 100) < 1)       //skjuter med 1% chans
             {
                 weaponHandler.Shoot(texturePos, angle, new Vector2(), new Point(), Player.CurrentPlayerPos, DamageOrigin.enemy, Trigger.Pressed);
             }
@@ -41,14 +41,14 @@ namespace Template
             spriteBatch.Draw(Assets.Enemy, new Rectangle((int)texturePos.X, (int)texturePos.Y, 30, 30), null, Color.White, angle, new Vector2(Assets.Enemy.Width / 2, Assets.Enemy.Height / 2), SpriteEffects.None, 0);
         }
 
-        public void SearchAndDestroy()
+        public void SearchAndDestroy()      //söker efter spelaren innom gränser(se while() loop)
         {
             Vector2 direction = new Vector2((float)Math.Cos(angle), (float)Math.Sin(angle));
             speed = 1.2f;
             texturePos += direction * speed;
         }
 
-        public void SetEnemyWeaponHandler(WeaponHandler wH)
+        public void SetEnemyWeaponHandler(WeaponHandler wH)     //sätter weaponhandler
         {
             weaponHandler = wH;
         }

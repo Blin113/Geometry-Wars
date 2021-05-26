@@ -5,7 +5,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Template
 {
-    class Bullet : BaseClass
+    class Bullet : BaseClass        //ärver från Baseclass
     {
         private Vector2 speed;
         private Point size = new Point(4, 4);
@@ -40,7 +40,7 @@ namespace Template
         }
     }
 
-    enum DamageOrigin
+    enum DamageOrigin       //enum för att bestämma vilket objekt som skottet deriveras från
     {
         player,
         enemy
