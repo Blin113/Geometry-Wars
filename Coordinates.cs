@@ -9,7 +9,7 @@ namespace Template
 {
     public class Coordinates<T>
     {
-        public static T[] CreateCoordinatesArray(T x, T y)
+        public static T[] CreateCoordinatesArray<T>(T x, T y)       //tekniskt sett är det en generisk metod....
         {
             return new T[] { x, y };
         }
