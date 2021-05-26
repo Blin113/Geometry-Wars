@@ -114,6 +114,13 @@ namespace Template
                     break;
 
                 case CurrentMenu.None:
+                    int Coordx = (int)player.Position.X;
+                    int Coordy = (int)player.Position.Y;
+                    //använder den generiska klassen Coordinates för att skapa en string array av spelarens position
+                    string[] CC = Coordinates<string>.CreateCoordinatesArray(Coordx.ToString(), Coordy.ToString());
+
+                    spriteBatch.DrawString(Assets.MenuFont, "(" + string.Join(" , ", CC) + ")", new Vector2(10, 440), Color.Purple);
+
                     break;
 
                 default:
