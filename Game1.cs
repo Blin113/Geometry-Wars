@@ -326,23 +326,33 @@ namespace Template
                     }
                 }
             }
-
+            
             for (int i = 0; i < bullets1.Count; i++)
             {
                 if (bullets1[i].GetDamageOrigin == DamageOrigin.enemy && player.HitBox.Intersects(bullets1[i].HitBox))
                 {
                     bullets1.RemoveAt(i);
-                    player.Collision(null, bullets1[i]);
+                    player.Collision(null, bullets1[i], null);
                     i--;
                 }
             }
-
+            
             for (int i = 0; i < swarmers.Count; i++)
             {
                 if (swarmers[i].HitBox.Intersects(player.HitBox))
                 {
-                    player.Collision(swarmers[i], null);
+                    player.Collision(swarmers[i], null, null);
                     swarmers.RemoveAt(i);
+                    i--;
+                }
+            }
+
+            for (int i = 0; i < WeaponPowerUps.Count; i++)
+            {
+                if (WeaponPowerUps[i].HitBox.Intersects(player.HitBox))
+                {
+                    player.Collision(null, null, WeaponPowerUps[i]);
+                    WeaponPowerUps.RemoveAt(i);
                     i--;
                 }
             }

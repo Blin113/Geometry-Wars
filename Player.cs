@@ -119,11 +119,16 @@ namespace Template
             }
         }
 
-        public void Collision(Swarmer swarmer_Collider, Bullet bullet_Collider)
+        public void Collision(Swarmer swarmer_Collider, Bullet bullet_Collider, WeaponPowerUp powerUp_Collider)
         {
             if (swarmer_Collider is Swarmer || bullet_Collider is Bullet)
             {
                 health.currentHP -= 2;
+            }
+
+            if (powerUp_Collider is WeaponPowerUp)
+            {
+                health.currentHP = health.HP;
             }
         }
 

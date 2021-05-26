@@ -24,6 +24,7 @@ namespace Template
             this.speed = speed;
 
             hitBox.Size = this.size;
+            hitBox.Location = texturePos.ToPoint();
         }
 
         public override void Update(Camera camera)

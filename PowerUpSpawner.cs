@@ -9,7 +9,7 @@ namespace Template
 {
     class PowerUpSpawner
     {
-        private List<WeaponPowerUp> WeaponPowerUps = new List<WeaponPowerUp>();
+        private List<WeaponPowerUp> weaponPowerUps = new List<WeaponPowerUp>();
         private Random rnd = new Random();
 
         private float time = 0;
@@ -18,7 +18,7 @@ namespace Template
 
         public PowerUpSpawner(List<WeaponPowerUp> weaponPowerUps)
         {
-            this.WeaponPowerUps = WeaponPowerUps;
+            this.weaponPowerUps = weaponPowerUps;
         }
 
         /// <summary>
@@ -39,12 +39,10 @@ namespace Template
                 y = rnd.Next(0, 4000);
             } while (DistanceFromPlayer(x, y));
 
-            if (WeaponPowerUps.Count < maxPowerUps)
+            if (weaponPowerUps.Count < 20)
             {
-                WeaponPowerUps.Add(new WeaponPowerUp(Assets.PowerUp, new Vector2(x, y), 0));
+                weaponPowerUps.Add(new WeaponPowerUp(Assets.PowerUp, new Vector2(x, y), 0));
             }
-
-            PowerUpLimit();
         }
 
         private bool DistanceFromPlayer(int x, int y)
@@ -53,16 +51,6 @@ namespace Template
                 || x <= Player.CurrentPlayerPos.X - 1000
                 && y >= Player.CurrentPlayerPos.Y + 1000
                 || y <= Player.CurrentPlayerPos.Y - 1000;
-        }
-
-        private void PowerUpLimit()
-        {
-            if (time > spawnInterval)
-            {
-                maxPowerUps += 5;
-                time -= spawnInterval;
-                spawnInterval += 10;
-            }
         }
     }
 }

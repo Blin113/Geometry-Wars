@@ -8,6 +8,6 @@ namespace Template
 {
     interface ICollision
     {
-        void Collision(Swarmer swarmer_Collider, Bullet bullet_Collider);
+        void Collision(Swarmer swarmer_Collider, Bullet bullet_Collider, WeaponPowerUp powerUp_Collider);
     }
 }

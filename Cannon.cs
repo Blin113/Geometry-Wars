@@ -23,11 +23,9 @@ namespace Template
         {
             angle = (float)Math.Atan2(texturePos.Y - Player.CurrentPlayerPos.Y, texturePos.X - Player.CurrentPlayerPos.X) + (float)(Math.PI);
 
-            
-
-            if (rnd.Next(0, 100) < 100)
+            if (rnd.Next(0, 100) < 1)
             {
-                weaponHandler.Shoot(texturePos, angle, new Vector2(), new Point(), Player.CurrentPlayerPos, DamageOrigin.enemy, Trigger.Pressed);   //how do i handle the trigger here?
+                weaponHandler.Shoot(texturePos, angle, new Vector2(), new Point(), Player.CurrentPlayerPos, DamageOrigin.enemy, Trigger.Pressed);
             }
 
             hitBox.Location = texturePos.ToPoint();
